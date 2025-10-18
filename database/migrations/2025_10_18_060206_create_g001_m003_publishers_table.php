@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('g001_m003_publishers', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->text('address')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

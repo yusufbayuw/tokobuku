@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('g002_m009_returns', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('from_location_id')->nullable()->constrained('g002_m007_locations')->cascadeOnDelete();
+            $table->foreignId('to_location_id')->nullable()->constrained('g002_m007_locations')->cascadeOnDelete();
+            $table->foreignId('handled_by')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->date('return_date')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

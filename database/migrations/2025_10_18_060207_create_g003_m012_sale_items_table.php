@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('g003_m012_sale_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('g003_m011_sale_id')->nullable()->constrained('g003_m011_sales')->cascadeOnDelete();
+            $table->foreignId('g001_m004_book_id')->nullable()->constrained('g001_m004_books')->cascadeOnDelete();
+            $table->decimal('unit_price', 15, 2)->nullable();
+            $table->integer('qty')->nullable();
+            $table->decimal('subtotal', 15, 2)->nullable();
             $table->timestamps();
         });
     }

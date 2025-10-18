@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('g001_m002_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('g002_m007_locations', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->string('type')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }
