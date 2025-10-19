@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class G001M006CategoryBook extends Model
+class G001M006CategoryBook extends Pivot
 {
-    //
+    protected $table = 'g001_m006_category_books';
 }

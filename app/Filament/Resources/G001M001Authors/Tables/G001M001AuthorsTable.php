@@ -16,15 +16,21 @@ class G001M001AuthorsTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Nama Penulis')
                     ->searchable(),
-                TextColumn::make('photo')
-                    ->searchable(),
+                TextColumn::make('books_count')
+                    ->counts('books')
+                    ->label('Jumlah Buku')
+                    ->placeholder('-')
+                    ->sortable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label('Dibuat Pada')
+                    ->dateTime('d M Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Diperbarui Pada')
+                    ->dateTime('d M Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

@@ -4,6 +4,7 @@ namespace App\Filament\Resources\G001M004Books\Schemas;
 
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Schema;
 
 class G001M004BookInfolist
@@ -12,6 +13,38 @@ class G001M004BookInfolist
     {
         return $schema
             ->components([
+                Tabs::make('Book Details')
+                    ->tabs([
+                        Tabs\Tab::make('Detail Buku')
+                            ->icon('heroicon-o-information-circle')
+                            ->components([
+                                TextEntry::make('authors.name')
+                                    ->label('Penulis Buku')
+                                    ->placeholder('-'),
+                                TextEntry::make('publisher.name')
+                                    ->label('Penerbit Buku')
+                                    ->placeholder('-'),
+                                TextEntry::make('categories_list')
+                                    ->label('Kategori Buku')
+                                    ->placeholder('-'),
+                                TextEntry::make('description')
+                                    ->label('Deskripsi')
+                                    ->placeholder('-')
+                                    ->columnSpanFull(),
+                            ]),
+                        Tabs\Tab::make('Riwayat')
+                            ->icon('heroicon-o-clock')
+                            ->components([
+                                TextEntry::make('created_at')
+                                    ->label('Dibuat Pada')
+                                    ->dateTime('d M Y H:i:s')
+                                    ->placeholder('-'),
+                                TextEntry::make('updated_at')
+                                    ->label('Diperbarui Pada')
+                                    ->dateTime('d M Y H:i:s')
+                                    ->placeholder('-'),
+                            ]),
+                    ]),
                 TextEntry::make('title')
                     ->placeholder('-'),
                 TextEntry::make('subtitle')

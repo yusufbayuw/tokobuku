@@ -16,11 +16,17 @@ class G001M003PublishersTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Nama Penerbit')
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label('Email address')
+                    ->label('Email Penerbit')
+                    ->copyable()
+                    ->placeholder('-')
                     ->searchable(),
                 TextColumn::make('phone')
+                    ->label('Telepon Penerbit')
+                    ->copyable()
+                    ->placeholder('-')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

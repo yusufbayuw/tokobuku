@@ -23,7 +23,7 @@ class G001M006CategoryBookResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
     protected static string|UnitEnum|null $navigationGroup = '📚 Master Data Buku';
-    protected static ?string $slug = 'category-book';
+    protected static ?string $slug = 'category-book-tag-170845';
     protected static ?string $modelLabel = 'Buku Terkategori';
     protected static ?string $navigationLabel = 'Buku Terkategori';
 

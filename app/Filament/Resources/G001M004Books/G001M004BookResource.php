@@ -20,7 +20,7 @@ use Filament\Tables\Table;
 class G001M004BookResource extends Resource
 {
     protected static ?string $model = G001M004Book::class;
-
+    protected static ?string $recordTitleAttribute = 'title';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookOpen;
     protected static string|UnitEnum|null $navigationGroup = '📚 Master Data Buku';
     protected static ?string $slug = 'book';

@@ -13,11 +13,16 @@ class G001M001AuthorForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label('Nama Penulis')
+                    ->required()
                     ->default(null),
                 Textarea::make('bio')
+                    ->label('Deskripsi')
                     ->default(null)
                     ->columnSpanFull(),
                 TextInput::make('photo')
+                    ->label('Foto')
+                    ->hidden()
                     ->default(null),
             ]);
     }

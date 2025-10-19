@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('subtitle')->nullable();
+            $table->string('isbn')->nullable();
             $table->string('sku')->nullable();
             $table->foreignId('g001_m003_publisher_id')->nullable()->constrained('g001_m003_publishers')->cascadeOnDelete();
             $table->string('edition')->nullable();

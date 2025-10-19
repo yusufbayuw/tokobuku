@@ -6,6 +6,7 @@ use App\Filament\Resources\G001M003Publishers\Pages\CreateG001M003Publisher;
 use App\Filament\Resources\G001M003Publishers\Pages\EditG001M003Publisher;
 use App\Filament\Resources\G001M003Publishers\Pages\ListG001M003Publishers;
 use App\Filament\Resources\G001M003Publishers\Pages\ViewG001M003Publisher;
+use App\Filament\Resources\G001M003Publishers\RelationManagers\BooksRelationManager;
 use App\Filament\Resources\G001M003Publishers\Schemas\G001M003PublisherForm;
 use App\Filament\Resources\G001M003Publishers\Schemas\G001M003PublisherInfolist;
 use App\Filament\Resources\G001M003Publishers\Tables\G001M003PublishersTable;
@@ -45,7 +46,7 @@ class G001M003PublisherResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            BooksRelationManager::class,
         ];
     }
 

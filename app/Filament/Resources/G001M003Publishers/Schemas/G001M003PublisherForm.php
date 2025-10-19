@@ -13,18 +13,22 @@ class G001M003PublisherForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label('Nama Penerbit')
                     ->default(null),
                 TextInput::make('email')
-                    ->label('Email address')
+                    ->label('Email Penerbit')
                     ->email()
                     ->default(null),
                 TextInput::make('phone')
-                    ->tel()
+                    ->label('Telepon Penerbit')
+                    ->numeric()
                     ->default(null),
                 Textarea::make('address')
+                    ->label('Alamat')
                     ->default(null)
                     ->columnSpanFull(),
                 Textarea::make('description')
+                    ->label('Deskripsi')
                     ->default(null)
                     ->columnSpanFull(),
             ]);

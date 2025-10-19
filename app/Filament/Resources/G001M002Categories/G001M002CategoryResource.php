@@ -6,6 +6,7 @@ use App\Filament\Resources\G001M002Categories\Pages\CreateG001M002Category;
 use App\Filament\Resources\G001M002Categories\Pages\EditG001M002Category;
 use App\Filament\Resources\G001M002Categories\Pages\ListG001M002Categories;
 use App\Filament\Resources\G001M002Categories\Pages\ViewG001M002Category;
+use App\Filament\Resources\G001M002Categories\RelationManagers\BooksRelationManager;
 use App\Filament\Resources\G001M002Categories\Schemas\G001M002CategoryForm;
 use App\Filament\Resources\G001M002Categories\Schemas\G001M002CategoryInfolist;
 use App\Filament\Resources\G001M002Categories\Tables\G001M002CategoriesTable;
@@ -45,7 +46,7 @@ class G001M002CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            BooksRelationManager::class,
         ];
     }
 

@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class G001M004Book extends Model
 {
+    public function getRecordTitleAttribute(): string
+    {
+        return $this->title;
+    }
+
     public function authors(): BelongsToMany
     {
         return $this->belongsToMany(

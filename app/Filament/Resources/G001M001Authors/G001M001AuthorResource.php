@@ -6,6 +6,7 @@ use App\Filament\Resources\G001M001Authors\Pages\CreateG001M001Author;
 use App\Filament\Resources\G001M001Authors\Pages\EditG001M001Author;
 use App\Filament\Resources\G001M001Authors\Pages\ListG001M001Authors;
 use App\Filament\Resources\G001M001Authors\Pages\ViewG001M001Author;
+use App\Filament\Resources\G001M001Authors\RelationManagers\BooksRelationManager;
 use App\Filament\Resources\G001M001Authors\Schemas\G001M001AuthorForm;
 use App\Filament\Resources\G001M001Authors\Schemas\G001M001AuthorInfolist;
 use App\Filament\Resources\G001M001Authors\Tables\G001M001AuthorsTable;
@@ -45,7 +46,7 @@ class G001M001AuthorResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            BooksRelationManager::class,
         ];
     }
 

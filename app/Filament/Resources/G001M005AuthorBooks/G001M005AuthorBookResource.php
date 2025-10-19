@@ -23,7 +23,7 @@ class G001M005AuthorBookResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedLink;
     protected static string|UnitEnum|null $navigationGroup = '📚 Master Data Buku';
-    protected static ?string $slug = 'author-book';
+    protected static ?string $slug = 'author-book-link-170845';
     protected static ?string $modelLabel = 'Buku Penulis';
     protected static ?string $navigationLabel = 'Buku Penulis';
 

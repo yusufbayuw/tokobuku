@@ -17,3 +17,4 @@ class G001M001Author extends Model
         );
     }
 }
+

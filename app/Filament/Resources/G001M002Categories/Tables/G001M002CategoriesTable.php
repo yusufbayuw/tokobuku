@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\G001M002Categories\Tables;
 
+use Dom\Text;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -17,14 +18,22 @@ class G001M002CategoriesTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
+                TextColumn::make('books_count')
+                    ->counts('books')
+                    ->label('Jumlah Buku')
+                    ->placeholder('-')
+                    ->sortable(),
                 TextColumn::make('description')
+                    ->label('Deskripsi')
+                    ->placeholder('-')
+                    ->limit(20)
                     ->searchable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d M Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('d M Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
