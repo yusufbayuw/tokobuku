@@ -16,14 +16,20 @@ class G002M009ReturnForm
             ->components([
                 Select::make('from_location_id')
                     ->label('Lokasi Pengirim')
+                    ->searchable()
+                    ->preload()
                     ->relationship('fromLocation', 'name')
                     ->default(null),
                 Select::make('to_location_id')
                     ->label('Lokasi Penerima')
+                    ->searchable()
+                    ->preload()
                     ->relationship('toLocation', 'name')
                     ->default(null),
                 Select::make('handled_by')
                     ->label('Ditangani Oleh')
+                    ->searchable()
+                    ->preload()
                     ->relationship('handler', 'name')
                     ->default(null),
                 DatePicker::make('return_date')

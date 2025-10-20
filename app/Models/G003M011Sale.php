@@ -15,7 +15,7 @@ class G003M011Sale extends Model
 
     public function seller(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function items(): HasMany

@@ -19,7 +19,7 @@ class G002M010ReturnItemsTable
                     ->label('Buku')
                     ->searchable(),
                 TextColumn::make('qty')
-                    ->label('Jumlah Buku')
+                    ->label('Jumlah')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('retur.return_date')
@@ -48,7 +48,7 @@ class G002M010ReturnItemsTable
             ])
             ->recordActions([
                 ViewAction::make(),
-                EditAction::make(),
+                //EditAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

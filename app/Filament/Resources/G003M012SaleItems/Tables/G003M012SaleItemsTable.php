@@ -15,26 +15,31 @@ class G003M012SaleItemsTable
     {
         return $table
             ->columns([
-                TextColumn::make('g003_m011_sale_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('g001_m004_book_id')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('sale.location.name')
+                    ->label('Lokasi')
+                    ->searchable(),
+                TextColumn::make('book.title')
+                    ->label('Buku')
+                    ->searchable(),
                 TextColumn::make('unit_price')
+                    ->label('Harga Satuan')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('qty')
+                    ->label('Jumlah')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('subtotal')
+                    ->label('Subtotal')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Tanggal Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -44,7 +49,7 @@ class G003M012SaleItemsTable
             ])
             ->recordActions([
                 ViewAction::make(),
-                EditAction::make(),
+                //EditAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

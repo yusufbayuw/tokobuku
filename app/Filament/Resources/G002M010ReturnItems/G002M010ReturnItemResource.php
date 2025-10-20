@@ -22,10 +22,10 @@ class G002M010ReturnItemResource extends Resource
     protected static ?string $model = G002M010ReturnItem::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookmark;
-    protected static string|UnitEnum|null $navigationGroup = '🏛️ Inventori & Lokasi';
+    protected static string|UnitEnum|null $navigationGroup = '📝 Rekap & Laporan';
     protected static ?string $slug = 'return-item';
-    protected static ?string $modelLabel = 'Detail Distribusi Buku';
-    protected static ?string $navigationLabel = 'Detail Distribusi Buku';
+    protected static ?string $modelLabel = 'Buku Terdistribusi';
+    protected static ?string $navigationLabel = 'Buku Terdistribusi';
 
     public static function form(Schema $schema): Schema
     {
@@ -53,9 +53,9 @@ class G002M010ReturnItemResource extends Resource
     {
         return [
             'index' => ListG002M010ReturnItems::route('/'),
-            'create' => CreateG002M010ReturnItem::route('/create'),
+            'create-return-item-170845' => CreateG002M010ReturnItem::route('/create'),
             'view' => ViewG002M010ReturnItem::route('/{record}'),
-            'edit' => EditG002M010ReturnItem::route('/{record}/edit'),
+            'edit-return-item-170845' => EditG002M010ReturnItem::route('/{record}/edit'),
         ];
     }
 }

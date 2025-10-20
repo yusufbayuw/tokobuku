@@ -14,10 +14,14 @@ class G002M010ReturnItemForm
             ->components([
                 Select::make('g002_m009_return_id')
                     ->label('Distribusi Buku')
-                    ->relationship('return', 'id')
+                    ->searchable()
+                    ->preload()
+                    ->relationship('retur', 'id')
                     ->default(null),
                 Select::make('g001_m004_book_id')
                     ->label('Buku')
+                    ->searchable()
+                    ->preload()
                     ->relationship('book', 'title')
                     ->default(null),
                 TextInput::make('qty')

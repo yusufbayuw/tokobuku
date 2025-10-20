@@ -21,11 +21,12 @@ class G002M007LocationForm
                         'agen' => 'Agen',
                         'toko' => 'Toko',
                     ])
-                    ->default(null),
+                    ->preload(),
                 Select::make('user_id')
+                    ->searchable()
                     ->label('Penanggung Jawab')
                     ->relationship('user', 'name')
-                    ->default(null),
+                    ->preload(),
             ]);
     }
 }

@@ -6,6 +6,7 @@ use App\Filament\Resources\G003M011Sales\Pages\CreateG003M011Sale;
 use App\Filament\Resources\G003M011Sales\Pages\EditG003M011Sale;
 use App\Filament\Resources\G003M011Sales\Pages\ListG003M011Sales;
 use App\Filament\Resources\G003M011Sales\Pages\ViewG003M011Sale;
+use App\Filament\Resources\G003M011Sales\RelationManagers\ItemsRelationManager;
 use App\Filament\Resources\G003M011Sales\Schemas\G003M011SaleForm;
 use App\Filament\Resources\G003M011Sales\Schemas\G003M011SaleInfolist;
 use App\Filament\Resources\G003M011Sales\Tables\G003M011SalesTable;
@@ -45,7 +46,7 @@ class G003M011SaleResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ItemsRelationManager::class,
         ];
     }
 

@@ -58,6 +58,7 @@ class G001M004BookForm
                             ->multiple()
                             ->relationship(titleAttribute: 'name')
                             ->preload()
+                            ->searchable()
                             ->label('Penulis Buku')
                             ->createOptionForm(
                                 G001M001AuthorForm::configure(Schema::make())->getComponents()
@@ -65,6 +66,7 @@ class G001M004BookForm
                         Select::make('g001_m003_publisher_id')
                             ->relationship('publisher', titleAttribute: 'name')
                             ->preload()
+                            ->searchable()
                             ->label('Penerbit')
                             ->createOptionForm(
                                 G001M003PublisherForm::configure(Schema::make())->getComponents()
@@ -77,6 +79,7 @@ class G001M004BookForm
                             ->multiple()
                             ->relationship(titleAttribute: 'name')
                             ->preload()
+                            ->searchable()
                             ->label('Kategori Buku')
                             ->createOptionForm(
                                 G001M002CategoryForm::configure(Schema::make())->getComponents()

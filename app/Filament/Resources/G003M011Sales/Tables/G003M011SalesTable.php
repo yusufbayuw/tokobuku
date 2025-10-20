@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\G003M011Sales\Tables;
 
+use Dom\Text;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -15,22 +16,26 @@ class G003M011SalesTable
     {
         return $table
             ->columns([
-                TextColumn::make('g002_m007_location_id')
-                    ->numeric()
+                TextColumn::make('sale_date')
+                    ->label('Tanggal Penjualan')
                     ->sortable(),
-                TextColumn::make('user_id')
-                    ->numeric()
+                TextColumn::make('location.name')
+                    ->label('Lokasi')
                     ->sortable(),
-                TextColumn::make('customer_name')
-                    ->searchable(),
+                TextColumn::make('seller.name')
+                    ->label('Dijual Oleh')
+                    ->sortable(),
                 TextColumn::make('total')
+                    ->label('Total')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Tanggal Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

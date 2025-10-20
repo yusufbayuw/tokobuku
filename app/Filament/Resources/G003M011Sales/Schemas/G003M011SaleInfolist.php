@@ -20,7 +20,7 @@ class G003M011SaleInfolist
                                 TextEntry::make('location.name')
                                     ->label('Lokasi Penjualan')
                                     ->placeholder('-'),
-                                TextEntry::make('user.name')
+                                TextEntry::make('seller.name')
                                     ->label('Dijual Oleh')
                                     ->placeholder('-'),
                                 TextEntry::make('customer_name')

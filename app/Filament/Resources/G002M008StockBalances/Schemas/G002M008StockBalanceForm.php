@@ -14,10 +14,14 @@ class G002M008StockBalanceForm
             ->components([
                 Select::make('g001_m004_book_id')
                     ->label('Judul Buku')
+                    ->searchable()
+                    ->preload()
                     ->relationship('book', 'title')
                     ->required(),
                 Select::make('g002_m007_location_id')
                     ->label('Lokasi Buku')
+                    ->searchable()
+                    ->preload()
                     ->relationship('location', 'name')
                     ->required(),
                 TextInput::make('qty')

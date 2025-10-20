@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Users\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Schema;
 
 class UserInfolist
@@ -11,20 +12,38 @@ class UserInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('name'),
-                TextEntry::make('email')
-                    ->label('Email address'),
-                TextEntry::make('email_verified_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('username')
-                    ->placeholder('-'),
-                TextEntry::make('created_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('updated_at')
-                    ->dateTime()
-                    ->placeholder('-'),
+                Tabs::make('Detail Pengguna')
+                    ->tabs([
+                        Tabs\Tab::make('Informasi Pengguna')
+                            ->icon('heroicon-o-user-circle')
+                            ->components([
+                                TextEntry::make('name')
+                                    ->label('Nama'),
+                                TextEntry::make('email')
+                                    ->label('Alamat email'),
+                                TextEntry::make('username')
+                                    ->placeholder('-'),
+                            ]),
+                        Tabs\Tab::make('Peran Pengguna')
+                            ->icon('heroicon-o-shield-check')
+                            ->components([
+                                TextEntry::make('roles')
+                                    ->label('Peran')
+                                    ->formatStateUsing(fn($state) => $state->pluck('name')->join(', ')),
+                            ]),
+                        Tabs\Tab::make('Keamanan')
+                            ->icon('heroicon-o-clock')
+                            ->components([
+                                TextEntry::make('created_at')
+                                    ->label('Dibuat pada')
+                                    ->dateTime()
+                                    ->placeholder('-'),
+                                TextEntry::make('updated_at')
+                                    ->label('Diperbarui pada')
+                                    ->dateTime()
+                                    ->placeholder('-'),
+                            ]),
+                    ]),
             ]);
     }
 }
