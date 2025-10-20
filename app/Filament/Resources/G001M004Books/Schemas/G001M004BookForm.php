@@ -3,6 +3,9 @@
 namespace App\Filament\Resources\G001M004Books\Schemas;
 
 use App\Filament\Resources\G001M001Authors\Schemas\G001M001AuthorForm;
+use App\Filament\Resources\G001M002Categories\Schemas\G001M002CategoryForm;
+use App\Filament\Resources\G001M003Publishers\Schemas\G001M003PublisherForm;
+use App\Models\G001M003Publisher;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
@@ -63,7 +66,9 @@ class G001M004BookForm
                             ->relationship('publisher', titleAttribute: 'name')
                             ->preload()
                             ->label('Penerbit')
-                            ->default(null),
+                            ->createOptionForm(
+                                G001M003PublisherForm::configure(Schema::make())->getComponents()
+                            ),
                         TextInput::make('year')
                             ->label('Tahun Terbit')
                             ->numeric()
@@ -72,7 +77,10 @@ class G001M004BookForm
                             ->multiple()
                             ->relationship(titleAttribute: 'name')
                             ->preload()
-                            ->label('Kategori Buku'),
+                            ->label('Kategori Buku')
+                            ->createOptionForm(
+                                G001M002CategoryForm::configure(Schema::make())->getComponents()
+                            ),
                     ]),
                 Section::make('Informasi Harga dan Stok')
                     ->description('Detail mengenai harga dan stok minimal buku')

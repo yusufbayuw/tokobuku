@@ -6,6 +6,7 @@ use App\Filament\Resources\G001M004Books\Pages\CreateG001M004Book;
 use App\Filament\Resources\G001M004Books\Pages\EditG001M004Book;
 use App\Filament\Resources\G001M004Books\Pages\ListG001M004Books;
 use App\Filament\Resources\G001M004Books\Pages\ViewG001M004Book;
+use App\Filament\Resources\G001M004Books\RelationManagers\StockBalancesRelationManager;
 use App\Filament\Resources\G001M004Books\Schemas\G001M004BookForm;
 use App\Filament\Resources\G001M004Books\Schemas\G001M004BookInfolist;
 use App\Filament\Resources\G001M004Books\Tables\G001M004BooksTable;
@@ -45,7 +46,7 @@ class G001M004BookResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            StockBalancesRelationManager::class,
         ];
     }
 

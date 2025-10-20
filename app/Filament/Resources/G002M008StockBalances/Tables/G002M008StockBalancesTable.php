@@ -15,21 +15,24 @@ class G002M008StockBalancesTable
     {
         return $table
             ->columns([
-                TextColumn::make('g001_m004_book_id')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('book.title')
+                    ->label('Judul Buku')
+                    ->searchable(),
                 TextColumn::make('g002_m007_location_id')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('Lokasi Buku')
+                    ->searchable(),
                 TextColumn::make('qty')
+                    ->label('Kuantitas')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label('Tanggal Dibuat')
+                    ->dateTime('d M Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Tanggal Diperbarui')
+                    ->dateTime('d M Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

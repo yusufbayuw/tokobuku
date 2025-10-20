@@ -18,6 +18,12 @@ class G001M004BookInfolist
                         Tabs\Tab::make('Detail Buku')
                             ->icon('heroicon-o-information-circle')
                             ->components([
+                                TextEntry::make('title')
+                                    ->label('Judul Buku')
+                                    ->placeholder('-'),
+                                TextEntry::make('subtitle')
+                                    ->label('Subjudul Buku')
+                                    ->placeholder('-'),
                                 TextEntry::make('authors.name')
                                     ->label('Penulis Buku')
                                     ->placeholder('-'),
@@ -32,6 +38,52 @@ class G001M004BookInfolist
                                     ->placeholder('-')
                                     ->columnSpanFull(),
                             ]),
+                        Tabs\Tab::make('Informasi Tambahan')
+                            ->icon('heroicon-o-document-text')
+                            ->components([
+                                IconEntry::make('sku')
+                                    ->label('SKU')
+                                    ->placeholder('-'),
+                                TextEntry::make('isbn')
+                                    ->label('ISBN')
+                                    ->placeholder('-'),
+                                TextEntry::make('sku')
+                                    ->label('SKU')
+                                    ->placeholder('-'),
+                                TextEntry::make('edition')
+                                    ->label('Edisi Buku')
+                                    ->placeholder('-'),
+                                TextEntry::make('language')
+                                    ->label('Bahasa Buku')
+                                    ->placeholder('-'),
+                                TextEntry::make('pages')
+                                    ->label('Jumlah Halaman')
+                                    ->numeric()
+                                    ->placeholder('-'),
+                                TextEntry::make('cover_photo')
+                                    ->label('Sampul Buku')
+                                    ->placeholder('-'),
+                                IconEntry::make('active')
+                                    ->boolean()
+                                    ->hidden()
+                                    ->placeholder('-'),
+                            ]),
+                        Tabs\Tab::make('Harga')
+                            ->icon('heroicon-o-currency-dollar')
+                            ->components([
+                                TextEntry::make('retail_price')
+                                    ->label('Harga Toko')
+                                    ->numeric()
+                                    ->placeholder('-'),
+                                TextEntry::make('agent_price')
+                                    ->label('Harga Agen')
+                                    ->numeric()
+                                    ->placeholder('-'),
+                                TextEntry::make('min_stock')
+                                    ->label('Minimum Stok')
+                                    ->numeric()
+                                    ->placeholder('-'),
+                            ]),
                         Tabs\Tab::make('Riwayat')
                             ->icon('heroicon-o-clock')
                             ->components([
@@ -44,46 +96,7 @@ class G001M004BookInfolist
                                     ->dateTime('d M Y H:i:s')
                                     ->placeholder('-'),
                             ]),
-                    ]),
-                TextEntry::make('title')
-                    ->placeholder('-'),
-                TextEntry::make('subtitle')
-                    ->placeholder('-'),
-                TextEntry::make('sku')
-                    ->label('SKU')
-                    ->placeholder('-'),
-                TextEntry::make('g001_m003_publisher_id')
-                    ->numeric()
-                    ->placeholder('-'),
-                TextEntry::make('edition')
-                    ->placeholder('-'),
-                TextEntry::make('year')
-                    ->placeholder('-'),
-                TextEntry::make('language')
-                    ->placeholder('-'),
-                TextEntry::make('pages')
-                    ->numeric()
-                    ->placeholder('-'),
-                TextEntry::make('cover_photo')
-                    ->placeholder('-'),
-                TextEntry::make('retail_price')
-                    ->numeric()
-                    ->placeholder('-'),
-                TextEntry::make('agent_price')
-                    ->numeric()
-                    ->placeholder('-'),
-                TextEntry::make('min_stock')
-                    ->numeric()
-                    ->placeholder('-'),
-                IconEntry::make('active')
-                    ->boolean()
-                    ->placeholder('-'),
-                TextEntry::make('created_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('updated_at')
-                    ->dateTime()
-                    ->placeholder('-'),
+                    ])->columnSpanFull(),
             ]);
     }
 }

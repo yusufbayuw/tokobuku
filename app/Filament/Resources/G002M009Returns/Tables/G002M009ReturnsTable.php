@@ -16,21 +16,27 @@ class G002M009ReturnsTable
         return $table
             ->columns([
                 TextColumn::make('fromLocation.name')
+                    ->label('Lokasi Pengirim')
                     ->searchable(),
                 TextColumn::make('toLocation.name')
+                    ->label('Lokasi Penerima')
                     ->searchable(),
                 TextColumn::make('handled_by')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('Ditangani Oleh')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('return_date')
+                    ->label('Tanggal Distribusi')
                     ->date()
                     ->sortable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label('Tanggal Dibuat')
+                    ->dateTime('d M Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Tanggal Diperbarui')
+                    ->dateTime('d M Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

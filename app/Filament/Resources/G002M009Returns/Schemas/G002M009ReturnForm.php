@@ -15,16 +15,22 @@ class G002M009ReturnForm
         return $schema
             ->components([
                 Select::make('from_location_id')
+                    ->label('Lokasi Pengirim')
                     ->relationship('fromLocation', 'name')
                     ->default(null),
                 Select::make('to_location_id')
+                    ->label('Lokasi Penerima')
                     ->relationship('toLocation', 'name')
                     ->default(null),
-                TextInput::make('handled_by')
-                    ->numeric()
+                Select::make('handled_by')
+                    ->label('Ditangani Oleh')
+                    ->relationship('handler', 'name')
                     ->default(null),
-                DatePicker::make('return_date'),
+                DatePicker::make('return_date')
+                    ->label('Tanggal Distribusi')
+                    ->default(null),
                 Textarea::make('note')
+                    ->label('Catatan')
                     ->default(null)
                     ->columnSpanFull(),
             ]);

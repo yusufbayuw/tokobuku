@@ -13,10 +13,17 @@ class G002M007LocationForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label('Nama Lokasi')
                     ->default(null),
-                TextInput::make('type')
+                Select::make('type')
+                    ->label('Tipe Lokasi')
+                    ->options([
+                        'agen' => 'Agen',
+                        'toko' => 'Toko',
+                    ])
                     ->default(null),
                 Select::make('user_id')
+                    ->label('Penanggung Jawab')
                     ->relationship('user', 'name')
                     ->default(null),
             ]);

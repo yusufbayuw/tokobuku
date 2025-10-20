@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\G002M008StockBalances\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -11,14 +12,18 @@ class G002M008StockBalanceForm
     {
         return $schema
             ->components([
-                TextInput::make('g001_m004_book_id')
-                    ->numeric()
-                    ->default(null),
-                TextInput::make('g002_m007_location_id')
-                    ->numeric()
-                    ->default(null),
+                Select::make('g001_m004_book_id')
+                    ->label('Judul Buku')
+                    ->relationship('book', 'title')
+                    ->required(),
+                Select::make('g002_m007_location_id')
+                    ->label('Lokasi Buku')
+                    ->relationship('location', 'name')
+                    ->required(),
                 TextInput::make('qty')
+                    ->label('Kuantitas')
                     ->numeric()
+                    ->minValue(0)
                     ->default(null),
             ]);
     }

@@ -18,41 +18,41 @@ class G001M004BooksTable
             ->columns([
                 TextColumn::make('title')
                     ->searchable(),
-                TextColumn::make('subtitle')
-                    ->searchable(),
                 TextColumn::make('sku')
                     ->label('SKU')
+                    ->placeholder('-')
+                    ->sortable()
                     ->searchable(),
-                TextColumn::make('g001_m003_publisher_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('edition')
+                TextColumn::make('publisher.name')
+                    ->label('Penerbit')
+                    ->placeholder('-')
                     ->searchable(),
-                TextColumn::make('year'),
-                TextColumn::make('language')
-                    ->searchable(),
-                TextColumn::make('pages')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('cover_photo')
+                TextColumn::make('authors.name')
+                    ->label('Penulis')
+                    ->placeholder('-')
+                    ->wrap()
                     ->searchable(),
                 TextColumn::make('retail_price')
+                    ->label('Harga Toko')
+                    ->placeholder('-')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('agent_price')
+                    ->label('Harga Agen')
+                    ->placeholder('-')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('min_stock')
+                TextColumn::make('stockBalances_sum')
+                    ->label('Stok')
+                    ->placeholder('-')
                     ->numeric()
                     ->sortable(),
-                IconColumn::make('active')
-                    ->boolean(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d M Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('d M Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

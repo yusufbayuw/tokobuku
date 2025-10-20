@@ -15,21 +15,31 @@ class G002M010ReturnItemsTable
     {
         return $table
             ->columns([
-                TextColumn::make('g002_m009_return_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('g001_m004_book_id')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('book.title')
+                    ->label('Buku')
+                    ->searchable(),
                 TextColumn::make('qty')
+                    ->label('Jumlah Buku')
                     ->numeric()
                     ->sortable(),
+                TextColumn::make('retur.return_date')
+                    ->label('Tanggal Retur')
+                    ->dateTime('d M Y')
+                    ->sortable(),
+                TextColumn::make('retur.fromLocation.name')
+                    ->label('Lokasi Pengirim')
+                    ->searchable(),
+                TextColumn::make('retur.toLocation.name')
+                    ->label('Lokasi Penerima')
+                    ->searchable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d M Y H:i:s')
+                    ->label('Tanggal Dibuat')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('d M Y H:i:s')
+                     ->label('Tanggal Diperbarui')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

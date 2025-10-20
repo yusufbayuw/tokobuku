@@ -16,17 +16,23 @@ class G002M007LocationsTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Nama Lokasi')
+                    ->placeholder('-')
                     ->searchable(),
                 TextColumn::make('type')
+                    ->placeholder('-')
+                    ->label('Tipe Lokasi')
                     ->searchable(),
                 TextColumn::make('user.name')
+                    ->placeholder('-')
+                    ->label('Penanggung Jawab')
                     ->searchable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('d M Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('d M Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
