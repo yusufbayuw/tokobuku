@@ -20,7 +20,7 @@ class G001M001AuthorsTable
                     ->searchable(),
                 TextColumn::make('books_count')
                     ->counts('books')
-                    ->label('Jumlah Buku')
+                    ->label('Buku')
                     ->placeholder('-')
                     ->sortable(),
                 TextColumn::make('created_at')

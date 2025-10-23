@@ -23,7 +23,8 @@ class G003M011SaleResource extends Resource
     protected static ?string $model = G003M011Sale::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedReceiptPercent;
-    protected static string|UnitEnum|null $navigationGroup = '💰 Transaksi Penjualan';
+    protected static string|UnitEnum|null $navigationGroup = '💰 Penjualan';
+    protected static ?int $navigationSort = 3;
     protected static ?string $slug = 'sale';
     protected static ?string $modelLabel = 'Penjualan';
     protected static ?string $navigationLabel = 'Penjualan';

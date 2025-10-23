@@ -2,12 +2,13 @@
 
 namespace App\Filament\Resources\G002M008StockBalances\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use Filament\Tables\Table;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
+use Filament\Tables\Filters\SelectFilter;
 
 class G002M008StockBalancesTable
 {
@@ -18,8 +19,9 @@ class G002M008StockBalancesTable
                 TextColumn::make('book.title')
                     ->label('Judul Buku')
                     ->searchable(),
-                TextColumn::make('g002_m007_location_id')
+                TextColumn::make('location.name')
                     ->label('Lokasi Buku')
+                    ->badge()
                     ->searchable(),
                 TextColumn::make('qty')
                     ->label('Kuantitas')
@@ -37,7 +39,10 @@ class G002M008StockBalancesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // filter berdasarkan lokasi buku
+                SelectFilter::make('location_id')
+                    ->label('Lokasi Buku')
+                    ->relationship('location', 'name'),
             ])
             ->recordActions([
                 ViewAction::make(),

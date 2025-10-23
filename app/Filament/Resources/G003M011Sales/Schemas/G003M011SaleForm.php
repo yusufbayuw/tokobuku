@@ -29,7 +29,7 @@ class G003M011SaleForm
                     ->preload()
                     ->relationship('location', 'name')
                     ->label('Lokasi Penjualan')
-                    ->default(auth()->user()->location->id ?? null),
+                    ->default(auth()->user()->location->id ?? 'Toko'),
                 Select::make('user_id')
                     ->searchable()
                     ->preload()
@@ -44,51 +44,6 @@ class G003M011SaleForm
                     ->hidden()
                     ->label('Total Penjualan')
                     ->default(null),
-                Repeater::make('items')
-                    ->label('Item Penjualan')
-                    ->relationship('items')
-                    ->schema([
-                        Hidden::make('g003_m011_sale_id')
-                            ->default(function (G003M011Sale $record) {
-                                return $record->id;
-                            }),
-                        Select::make('g001_m004_book_id')
-                            ->label('Judul Buku')
-                            ->searchable()
-                            ->preload()
-                            ->relationship('book', 'title')
-                            ->afterStateUpdated(function (Get $get, Set $set, $state) {
-                                // Assuming Book model has a 'price' attribute
-                                $book = G001M004Book::find($state);
-
-                                if ($book) {
-                                    $book_price = auth()->user()->hasRole('agen') ? $book->agent_price : $book->retail_price;
-                                    $set('unit_price', $book_price);
-                                    if ($get('qty')) {
-                                        $set('subtotal', $get('qty') * $book_price);
-                                    }
-                                }
-                            }),
-                        TextInput::make('qty')
-                            ->label('Jumlah Pembelian')
-                            ->numeric()
-                            ->afterStateUpdated(function (Get $get, Set $set, $state) {
-                                $unit_price = $get('unit_price') ?? 0;
-                                $set('subtotal', $state * $unit_price);
-                            })
-                            ->reactive(),
-                        TextEntry::make('unit_price')
-                            ->label('Harga Satuan')
-                            ->numeric()
-                            ->reactive()
-                            ->inlineLabel()
-                            ->placeholder('-'),
-                        TextEntry::make('subtotal')
-                            ->numeric()
-                            ->inlineLabel()
-                            ->label('Subtotal')
-                            ->reactive(),
-                    ]),
             ]);
     }
 }

@@ -42,9 +42,11 @@ class G001M004BooksTable
                     ->placeholder('-')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('stockBalances_sum')
+                TextColumn::make('stocks_sum_qty')
+                    ->sum('stocks', 'qty')
                     ->label('Stok')
                     ->placeholder('-')
+                    ->suffix(fn ($state, $record) => $state < $record->min_stock ? ' ⚠️' : null)
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
@@ -57,7 +59,7 @@ class G001M004BooksTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // 
             ])
             ->recordActions([
                 ViewAction::make(),

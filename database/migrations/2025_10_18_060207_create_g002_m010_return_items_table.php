@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('g002_m010_return_items', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('g002_m009_return_id')->nullable()->constrained('g002_m009_returns')->cascadeOnDelete();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('g002_m009_return_id')->nullable()->constrained('g002_m009_returns')->cascadeOnDelete();
             $table->foreignId('g001_m004_book_id')->nullable()->constrained('g001_m004_books')->cascadeOnDelete();
             $table->integer('qty')->nullable();
             $table->timestamps();

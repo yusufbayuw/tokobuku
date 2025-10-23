@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\G002M007Location;
 use App\Models\User;
 
 class UserObserver
@@ -11,7 +12,12 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        //
+        if ($user->hasRole('agen')) {
+            G002M007Location::firstOrCreate(['user_id' => $user->id], [
+                'name' => 'Agen ' . $user->name,
+                'type' => 'agen',
+            ]);
+        }
     }
 
     /**
@@ -19,7 +25,12 @@ class UserObserver
      */
     public function updated(User $user): void
     {
-        //
+        if ($user->hasRole('agen')) {
+            G002M007Location::firstOrCreate(['user_id' => $user->id], [
+                'name' => 'Agen ' . $user->name,
+                'type' => 'agen',
+            ]);
+        }
     }
 
     /**

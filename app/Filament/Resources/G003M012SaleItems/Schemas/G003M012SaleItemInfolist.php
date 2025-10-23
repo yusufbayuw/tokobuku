@@ -47,7 +47,7 @@ class G003M012SaleItemInfolist
                                     ->dateTime()
                                     ->placeholder('-'),
                             ]),
-                    ]),
+                    ])->columnSpanFull(),
             ]);
     }
 }

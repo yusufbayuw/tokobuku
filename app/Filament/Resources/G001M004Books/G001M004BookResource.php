@@ -24,6 +24,7 @@ class G001M004BookResource extends Resource
     protected static ?string $recordTitleAttribute = 'title';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookOpen;
     protected static string|UnitEnum|null $navigationGroup = '📚 Master Data Buku';
+    protected static ?int $navigationSort = 1;
     protected static ?string $slug = 'book';
     protected static ?string $modelLabel = 'Buku';
     protected static ?string $navigationLabel = 'Buku';

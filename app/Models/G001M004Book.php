@@ -44,7 +44,7 @@ class G001M004Book extends Model
         return $this->hasMany(G003M012SaleItem::class, 'g001_m004_book_id');
     }
 
-    public function stockBalances(): HasMany
+    public function stocks(): HasMany
     {
         return $this->hasMany(G002M008StockBalance::class, 'g001_m004_book_id');
     }

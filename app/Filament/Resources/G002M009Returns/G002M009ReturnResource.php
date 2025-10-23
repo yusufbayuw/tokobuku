@@ -6,6 +6,7 @@ use App\Filament\Resources\G002M009Returns\Pages\CreateG002M009Return;
 use App\Filament\Resources\G002M009Returns\Pages\EditG002M009Return;
 use App\Filament\Resources\G002M009Returns\Pages\ListG002M009Returns;
 use App\Filament\Resources\G002M009Returns\Pages\ViewG002M009Return;
+use App\Filament\Resources\G002M009Returns\RelationManagers\ItemsRelationManager;
 use App\Filament\Resources\G002M009Returns\Schemas\G002M009ReturnForm;
 use App\Filament\Resources\G002M009Returns\Schemas\G002M009ReturnInfolist;
 use App\Filament\Resources\G002M009Returns\Tables\G002M009ReturnsTable;
@@ -23,6 +24,7 @@ class G002M009ReturnResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowPath;
     protected static string|UnitEnum|null $navigationGroup = '🏛️ Inventori & Lokasi';
+    protected static ?int $navigationSort = 2;
     protected static ?string $slug = 'return';
     protected static ?string $modelLabel = 'Distribusi Buku';
     protected static ?string $navigationLabel = 'Distribusi Buku';
@@ -45,7 +47,7 @@ class G002M009ReturnResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ItemsRelationManager::class,
         ];
     }
 

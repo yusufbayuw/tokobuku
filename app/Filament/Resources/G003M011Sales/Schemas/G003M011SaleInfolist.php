@@ -26,7 +26,8 @@ class G003M011SaleInfolist
                                 TextEntry::make('customer_name')
                                     ->label('Nama Pelanggan')
                                     ->placeholder('-'),
-                                TextEntry::make('total')
+                                TextEntry::make('items_sum_subtotal')
+                                    ->sum('items', 'subtotal')
                                     ->label('Total Penjualan')
                                     ->numeric()
                                     ->placeholder('-'),
@@ -41,7 +42,7 @@ class G003M011SaleInfolist
                                     ->dateTime('d F Y H:i:s')
                                     ->placeholder('-'),
                             ]),
-                    ]),
+                    ])->columnSpanFull(),
             ]);
     }
 }

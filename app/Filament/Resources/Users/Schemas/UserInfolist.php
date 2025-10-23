@@ -27,9 +27,8 @@ class UserInfolist
                         Tabs\Tab::make('Peran Pengguna')
                             ->icon('heroicon-o-shield-check')
                             ->components([
-                                TextEntry::make('roles')
-                                    ->label('Peran')
-                                    ->formatStateUsing(fn($state) => $state->pluck('name')->join(', ')),
+                                TextEntry::make('roles.name')
+                                    ->label('Peran'),
                             ]),
                         Tabs\Tab::make('Keamanan')
                             ->icon('heroicon-o-clock')
@@ -43,7 +42,7 @@ class UserInfolist
                                     ->dateTime()
                                     ->placeholder('-'),
                             ]),
-                    ]),
+                    ])->columnSpanFull(),
             ]);
     }
 }

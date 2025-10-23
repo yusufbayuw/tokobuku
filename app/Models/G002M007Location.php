@@ -3,11 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class G002M007Location extends Model
 {
+    use HasUuids;
+
+    protected $keyType = 'string';
+    public $incrementing = false;
+    
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class); 
@@ -18,7 +24,7 @@ class G002M007Location extends Model
         return $this->hasMany(G003M011Sale::class, 'g002_m007_location_id');
     }
 
-    public function stockBalances(): HasMany
+    public function stocks(): HasMany
     {
         return $this->hasMany(G002M008StockBalance::class, 'g002_m007_location_id');
     }

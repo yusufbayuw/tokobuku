@@ -22,7 +22,8 @@ class G003M012SaleItemResource extends Resource
     protected static ?string $model = G003M012SaleItem::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingBag;
-    protected static string|UnitEnum|null $navigationGroup = '📝 Rekap & Laporan';
+    protected static string|UnitEnum|null $navigationGroup = '📝 Rekap Transaksi';
+    protected static ?int $navigationSort = 4;
     protected static ?string $slug = 'sale-item';
     protected static ?string $modelLabel = 'Buku Terjual';
     protected static ?string $navigationLabel = 'Buku Terjual';

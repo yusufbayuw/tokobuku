@@ -25,7 +25,8 @@ class G003M011SalesTable
                 TextColumn::make('seller.name')
                     ->label('Dijual Oleh')
                     ->sortable(),
-                TextColumn::make('total')
+                TextColumn::make('items_sum_subtotal')
+                    ->sum('items', 'subtotal')
                     ->label('Total')
                     ->numeric()
                     ->sortable(),

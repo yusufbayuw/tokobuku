@@ -57,7 +57,7 @@ class G002M010ReturnItemInfolist
                                     ->dateTime('d F Y H:i:s')
                                     ->placeholder('-'),
                             ]),
-                    ]),
+                    ])->columnSpanFull(),
             ]);
     }
 }

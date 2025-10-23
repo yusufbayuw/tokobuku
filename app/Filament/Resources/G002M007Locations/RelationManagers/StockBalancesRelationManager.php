@@ -9,7 +9,7 @@ use Filament\Tables\Table;
 
 class StockBalancesRelationManager extends RelationManager
 {
-    protected static string $relationship = 'stockBalances';
+    protected static string $relationship = 'stocks';
 
     protected static null|string $inverseRelationship = 'location';
     protected static ?string $recordTitleAttribute = 'Daftar Stok Buku';

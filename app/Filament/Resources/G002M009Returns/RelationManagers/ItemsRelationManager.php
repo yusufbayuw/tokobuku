@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Filament\Resources\G003M011Sales\RelationManagers;
+namespace App\Filament\Resources\G002M009Returns\RelationManagers;
 
 use Filament\Tables\Table;
 use Filament\Schemas\Schema;
+use App\Models\G002M009Return;
 use Filament\Actions\EditAction;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use App\Models\G002M008StockBalance;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\DissociateAction;
@@ -22,8 +24,8 @@ use Filament\Resources\RelationManagers\RelationManager;
 class ItemsRelationManager extends RelationManager
 {
     protected static string $relationship = 'items';
-    protected static ?string $recordTitleAttribute = 'Jual Buku';
-    protected static ?string $modelLabel = 'Jual Buku';
+    protected static ?string $recordTitleAttribute = 'Distribusi Buku';
+    protected static ?string $modelLabel = 'Distribusi Buku';
     protected static ?string $title = '';
 
     public function form(Schema $schema): Schema
@@ -33,7 +35,7 @@ class ItemsRelationManager extends RelationManager
                 return null;
             }
 
-            $fromLocationId = $this->getOwnerRecord()->g002_m007_location_id;
+            $fromLocationId = $this->getOwnerRecord()->from_location_id;
 
             if (! $fromLocationId) {
                 return null;
@@ -68,29 +70,23 @@ class ItemsRelationManager extends RelationManager
                             return 'Stok tersedia: ' . $qty;
                         }
 
-                        return 'Pilih buku yang sesuai';
+                        return 'Pilih distribusi dan buku yang sesuai';
                     })
+                    ->minValue(1)
                     ->numeric(),
             ]);
-
     }
 
     public function table(Table $table): Table
     {
         return $table
+            ->recordTitleAttribute('book.title')
             ->columns([
                 TextColumn::make('book.title')
                     ->label('Buku')
-                    ->searchable(),
+                    ->sortable(),
                 TextColumn::make('qty')
-                    ->numeric()
-                    ->label('Jumlah')
-                    ->sortable(),
-                TextColumn::make('unit_price')
-                    ->label('Harga')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('subtotal')
+                    ->label('Qty')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')

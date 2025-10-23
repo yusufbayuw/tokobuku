@@ -6,6 +6,7 @@ use App\Filament\Resources\G002M010ReturnItems\Pages\CreateG002M010ReturnItem;
 use App\Filament\Resources\G002M010ReturnItems\Pages\EditG002M010ReturnItem;
 use App\Filament\Resources\G002M010ReturnItems\Pages\ListG002M010ReturnItems;
 use App\Filament\Resources\G002M010ReturnItems\Pages\ViewG002M010ReturnItem;
+use App\Filament\Resources\G002M010ReturnItems\RelationManagers\ItemsRelationManager;
 use App\Filament\Resources\G002M010ReturnItems\Schemas\G002M010ReturnItemForm;
 use App\Filament\Resources\G002M010ReturnItems\Schemas\G002M010ReturnItemInfolist;
 use App\Filament\Resources\G002M010ReturnItems\Tables\G002M010ReturnItemsTable;
@@ -22,7 +23,7 @@ class G002M010ReturnItemResource extends Resource
     protected static ?string $model = G002M010ReturnItem::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookmark;
-    protected static string|UnitEnum|null $navigationGroup = '📝 Rekap & Laporan';
+    protected static string|UnitEnum|null $navigationGroup = '📝 Rekap Transaksi';
     protected static ?string $slug = 'return-item';
     protected static ?string $modelLabel = 'Buku Terdistribusi';
     protected static ?string $navigationLabel = 'Buku Terdistribusi';

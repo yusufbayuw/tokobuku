@@ -40,7 +40,7 @@ class G002M008StockBalanceInfolist
                                     ->dateTime('d M Y H:i:s')
                                     ->placeholder('-'),
                             ]),
-                    ]),
+                    ])->columnSpanFull(),
             ]);
     }
 }
