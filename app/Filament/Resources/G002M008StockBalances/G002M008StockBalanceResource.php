@@ -27,14 +27,14 @@ class G002M008StockBalanceResource extends Resource
     protected static ?string $modelLabel = 'Jumlah Stok Buku';
     protected static ?string $navigationLabel = 'Jumlah Stok Buku';
 
-    public static function getEloquentQuery(): Builder
+    /* public static function getEloquentQuery(): Builder
     {
-        if (auth()->user()->hasRole(['admin', 'super_admin']) {
+        if (auth()->user()->hasRole(['admin', 'super_admin'])) {
             return parent::getEloquentQuery();
-        } elseif (auth()->user()->hasRole('agen') {
+        } elseif (auth()->user()->hasRole('agen')) {
             return parent::getEloquentQuery()->where('g002_m007_location_id', auth()->user()->locations->id);
         }
-    }
+    } */
 
     public static function form(Schema $schema): Schema
     {

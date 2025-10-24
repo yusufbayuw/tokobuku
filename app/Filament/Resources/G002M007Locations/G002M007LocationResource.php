@@ -28,14 +28,14 @@ class G002M007LocationResource extends Resource
     protected static ?string $modelLabel = 'Lokasi';
     protected static ?string $navigationLabel = 'Lokasi';
 
-    public static function getEloquentQuery(): Builder
+    /* public static function getEloquentQuery(): Builder
     {
         if (auth()->user()->hasRole(['admin', 'super_admin']) {
             return parent::getEloquentQuery();
         } elseif (auth()->user()->hasRole('agen') {
             return parent::getEloquentQuery()->where('user_id', auth()->user()->id);
         }
-    }
+    } */
 
     public static function form(Schema $schema): Schema
     {

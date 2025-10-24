@@ -30,14 +30,14 @@ class G002M009ReturnResource extends Resource
     protected static ?string $modelLabel = 'Distribusi Buku';
     protected static ?string $navigationLabel = 'Distribusi Buku';
 
-    public static function getEloquentQuery(): Builder
+    /* public static function getEloquentQuery(): Builder
     {
-        if (auth()->user()->hasRole(['admin', 'super_admin']) {
+        if (auth()->user()->hasRole(['admin', 'super_admin'])) {
             return parent::getEloquentQuery();
         } elseif (auth()->user()->hasRole('agen') {
             return parent::getEloquentQuery()->where('handled_by', auth()->user()->id);
         }
-    }
+    } */
 
     public static function form(Schema $schema): Schema
     {
