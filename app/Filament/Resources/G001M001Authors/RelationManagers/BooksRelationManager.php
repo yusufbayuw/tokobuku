@@ -19,6 +19,7 @@ use App\Filament\Resources\G001M004Books\G001M004BookResource;
 use App\Filament\Resources\G001M001Authors\G001M001AuthorResource;
 use App\Filament\Resources\G001M002Categories\Schemas\G001M002CategoryForm;
 use App\Filament\Resources\G001M003Publishers\Schemas\G001M003PublisherForm;
+use Filament\Actions\DetachAction;
 
 class BooksRelationManager extends RelationManager
 {
@@ -39,6 +40,9 @@ class BooksRelationManager extends RelationManager
                 TextColumn::make('year')
                     ->label('Tahun Terbit')
                     ->sortable(),
+            ])
+            ->recordActions([
+                DetachAction::make(),
             ])
             ->headerActions([
                 AttachAction::make()
@@ -94,8 +98,6 @@ class BooksRelationManager extends RelationManager
                             ->description('Informasi mengenai penulis, penerbit dan kategori buku')
                             ->icon('heroicon-o-building-library')
                             ->components([
-                                Hidden::make('authors')
-                                    ->default($this->getOwnerRecord()->id),
                                 Select::make('g001_m003_publisher_id')
                                     ->relationship('publisher', titleAttribute: 'name')
                                     ->preload()

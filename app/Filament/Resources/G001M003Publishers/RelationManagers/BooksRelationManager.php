@@ -3,13 +3,21 @@
 namespace App\Filament\Resources\G001M003Publishers\RelationManagers;
 
 use Filament\Tables\Table;
+use Filament\Schemas\Schema;
 use Filament\Actions\AttachAction;
 use Filament\Actions\CreateAction;
+use Filament\Actions\AssociateAction;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
+use Filament\Forms\Components\FileUpload;
 use Filament\Resources\RelationManagers\RelationManager;
 use App\Filament\Resources\G001M004Books\G001M004BookResource;
-use Filament\Actions\AssociateAction;
+use App\Filament\Resources\G001M001Authors\Schemas\G001M001AuthorForm;
+use App\Filament\Resources\G001M002Categories\Schemas\G001M002CategoryForm;
+use Filament\Actions\DissociateAction;
 
 class BooksRelationManager extends RelationManager
 {
@@ -31,6 +39,9 @@ class BooksRelationManager extends RelationManager
                     ->label('Tahun Terbit')
                     ->sortable(),
             ])
+            ->recordActions([
+                DissociateAction::make(),
+            ])
             ->headerActions([
                 AssociateAction::make()
                     ->label('Pilih Buku yang Ada')
@@ -50,9 +61,86 @@ class BooksRelationManager extends RelationManager
                         return $book;
                     })
                     ->schema([
-                        TextInput::make('title')->required(),
-                        TextInput::make('isbn')->nullable(),
-                        TextInput::make('retail_price')->numeric()->default(0),
+                        Section::make('Detail Buku')
+                    ->description('Informasi detail mengenai buku')
+                    ->icon('heroicon-o-book-open')
+                    ->components([
+                        TextInput::make('title')
+                            ->label('Judul Buku')
+                            ->default(null),
+                        TextInput::make('subtitle')
+                            ->label('Sub Judul')
+                            ->default(null),
+                        TextInput::make('sku')
+                            ->label('SKU')
+                            ->default(null),
+                        TextInput::make('isbn')
+                            ->label('ISBN')
+                            ->default(null),
+                        TextInput::make('edition')
+                            ->label('Edisi')
+                            ->default(null),
+                        TextInput::make('language')
+                            ->label('Bahasa')
+                            ->default(null),
+                        TextInput::make('pages')
+                            ->label('Jumlah Halaman')
+                            ->numeric()
+                            ->default(null),
+                        FileUpload::make('cover_photo')
+                            ->hidden()
+                            ->image()
+                            ->label('Foto Sampul'),
+                    ]),
+                Section::make('Penulis, Penerbit dan Kategori')
+                    ->description('Informasi mengenai penulis, penerbit dan kategori buku')
+                    ->icon('heroicon-o-building-library')
+                    ->components([
+                        Select::make('authors')
+                            ->multiple()
+                            ->relationship(titleAttribute: 'name')
+                            ->preload()
+                            ->searchable()
+                            ->label('Penulis Buku')
+                            ->createOptionForm(
+                                G001M001AuthorForm::configure(Schema::make())->getComponents()
+                            ),
+                        TextInput::make('year')
+                            ->label('Tahun Terbit')
+                            ->numeric()
+                            ->default(null),
+                        Select::make('categories')
+                            ->multiple()
+                            ->relationship(titleAttribute: 'name')
+                            ->preload()
+                            ->searchable()
+                            ->label('Kategori Buku')
+                            ->createOptionForm(
+                                G001M002CategoryForm::configure(Schema::make())->getComponents()
+                            ),
+                    ]),
+                Section::make('Informasi Harga dan Stok')
+                    ->description('Detail mengenai harga dan stok minimal buku')
+                    ->icon('heroicon-o-currency-dollar')
+                    ->components([
+                        TextInput::make('retail_price')
+                            ->label('Harga Toko')
+                            ->minValue(0)
+                            ->numeric()
+                            ->default(null),
+                        TextInput::make('agent_price')
+                            ->label('Harga Agen')
+                            ->minValue(0)
+                            ->numeric()
+                            ->default(null),
+                        TextInput::make('min_stock')
+                            ->label('Stok Minimal')
+                            ->numeric()
+                            ->minValue(0)
+                            ->default(null),
+                        Hidden::make('active')
+                            ->default(true),
+                    ]),
                     ]),
             ]);
     }
