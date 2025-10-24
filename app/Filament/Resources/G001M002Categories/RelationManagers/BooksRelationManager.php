@@ -15,7 +15,10 @@ class BooksRelationManager extends RelationManager
     protected static string $relationship = 'books';
     protected static null|string $inverseRelationship = 'categories';
     protected static ?string $recordTitleAttribute = 'Buku';
+    protected static ?string $modelLabel = 'Buku';
     protected static ?string $title = '';
+
+
 
     public function table(Table $table): Table
     {

@@ -16,11 +16,9 @@ class G003M012SaleItemForm
     {
         return $schema
             ->components([
-                Hidden::make('g003_m011_sale_id'),
-                /* Select::make('g003_m011_sale_id')
+                Select::make('g003_m011_sale_id')
                     ->label('ID Penjualan')
-                    ->hiddenOn(['create'])
-                    ->relationship('sale', 'id'), */
+                    ->relationship('sale', 'id'),
                 Select::make('g001_m004_book_id')
                     ->label('Judul Buku')
                     ->searchable()
