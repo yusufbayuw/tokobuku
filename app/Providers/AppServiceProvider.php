@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        URL::macro(
+        /* URL::macro(
             'alternateHasCorrectSignature',
             function (Request $request, $absolute = true, array $ignoreQuery = []) {
                 $ignoreQuery[] = 'signature';
@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
 
         Request::macro('hasValidSignature', function ($absolute = true, array $ignoreQuery = []) {
             return URL::alternateHasValidSignature($this, $absolute, $ignoreQuery);
-        });
+        }); */
     }
 
     /**
