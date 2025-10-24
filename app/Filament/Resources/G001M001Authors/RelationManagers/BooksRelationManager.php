@@ -95,7 +95,7 @@ class BooksRelationManager extends RelationManager
                             ->icon('heroicon-o-building-library')
                             ->components([
                                 Hidden::make('authors')
-                                    ->default($this->ownerRecord()->id),
+                                    ->default($this->getOwnerRecord()->id),
                                 Select::make('g001_m003_publisher_id')
                                     ->relationship('publisher', titleAttribute: 'name')
                                     ->preload()
