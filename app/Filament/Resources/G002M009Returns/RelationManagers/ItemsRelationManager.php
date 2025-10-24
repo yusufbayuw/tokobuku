@@ -108,7 +108,7 @@ class ItemsRelationManager extends RelationManager
             ->recordActions([
                 //EditAction::make(),
                 //DissociateAction::make(),
-                //DeleteAction::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 //BulkActionGroup::make([

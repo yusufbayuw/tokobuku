@@ -47,7 +47,27 @@ class G003M012SaleItemObserver
      */
     public function deleted(G003M012SaleItem $g003M012SaleItem): void
     {
-        //
+        $qty = $g003M012SaleItem->qty;
+
+        // Restore stock: add back qty to sale location
+        $stockBalance = G002M008StockBalance::where('g001_m004_book_id', $g003M012SaleItem->g001_m004_book_id)
+            ->where('g002_m007_location_id', $g003M012SaleItem->sale->g002_m007_location_id)
+            ->first();
+        if ($stockBalance) {
+            $stockBalance->qty = ($stockBalance->qty ?? 0) + $qty;
+            $stockBalance->save();
+        } else {
+            G002M008StockBalance::create([
+                'g001_m004_book_id' => $g003M012SaleItem->g001_m004_book_id,
+                'g002_m007_location_id' => $g003M012SaleItem->sale->g002_m007_location_id,
+                'qty' => $qty,
+            ]);
+        }
+
+        // Recalculate sale total (items_sum_subtotal should reflect current DB state after deletion)
+        $sale = $g003M012SaleItem->sale;
+        $sale->total = $sale->items_sum_subtotal;
+        $sale->save();
     }
 
     /**

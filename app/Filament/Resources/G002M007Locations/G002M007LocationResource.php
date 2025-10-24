@@ -2,20 +2,21 @@
 
 namespace App\Filament\Resources\G002M007Locations;
 
-use App\Filament\Resources\G002M007Locations\Pages\CreateG002M007Location;
-use App\Filament\Resources\G002M007Locations\Pages\EditG002M007Location;
-use App\Filament\Resources\G002M007Locations\Pages\ListG002M007Locations;
-use App\Filament\Resources\G002M007Locations\Pages\ViewG002M007Location;
-use App\Filament\Resources\G002M007Locations\Schemas\G002M007LocationForm;
-use App\Filament\Resources\G002M007Locations\Schemas\G002M007LocationInfolist;
-use App\Filament\Resources\G002M007Locations\Tables\G002M007LocationsTable;
-use App\Models\G002M007Location;
-use BackedEnum;
 use UnitEnum;
-use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
+use BackedEnum;
 use Filament\Tables\Table;
+use Filament\Schemas\Schema;
+use App\Models\G002M007Location;
+use Filament\Resources\Resource;
+use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\G002M007Locations\Pages\EditG002M007Location;
+use App\Filament\Resources\G002M007Locations\Pages\ViewG002M007Location;
+use App\Filament\Resources\G002M007Locations\Pages\ListG002M007Locations;
+use App\Filament\Resources\G002M007Locations\Pages\CreateG002M007Location;
+use App\Filament\Resources\G002M007Locations\Schemas\G002M007LocationForm;
+use App\Filament\Resources\G002M007Locations\Tables\G002M007LocationsTable;
+use App\Filament\Resources\G002M007Locations\Schemas\G002M007LocationInfolist;
 
 class G002M007LocationResource extends Resource
 {
@@ -26,6 +27,15 @@ class G002M007LocationResource extends Resource
     protected static ?string $slug = 'location';
     protected static ?string $modelLabel = 'Lokasi';
     protected static ?string $navigationLabel = 'Lokasi';
+
+    public static function getEloquentQuery(): Builder
+    {
+        if (auth()->user()->hasRole(['admin', 'super_admin']) {
+            return parent::getEloquentQuery();
+        } elseif (auth()->user()->hasRole('agen') {
+            return parent::getEloquentQuery()->where('user_id', auth()->user()->id);
+        }
+    }
 
     public static function form(Schema $schema): Schema
     {
