@@ -61,6 +61,7 @@ class ItemsRelationManager extends RelationManager
                 TextInput::make('qty')
                     ->label('Jumlah')
                     ->reactive()
+                    ->minValue(1)
                     ->disabled(fn (Get $get) => ! $get('g001_m004_book_id'))
                     ->maxValue(function (Get $get) use ($getStockQty) {
                         $qty = $getStockQty($get('g001_m004_book_id'));

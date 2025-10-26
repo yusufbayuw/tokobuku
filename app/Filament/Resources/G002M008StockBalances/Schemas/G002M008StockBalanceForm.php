@@ -27,7 +27,7 @@ class G002M008StockBalanceForm
                 TextInput::make('qty')
                     ->label('Kuantitas')
                     ->numeric()
-                    ->minValue(0)
+                    ->minValue(1)
                     ->default(null),
             ]);
     }

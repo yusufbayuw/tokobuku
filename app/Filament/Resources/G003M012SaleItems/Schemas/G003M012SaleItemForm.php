@@ -39,6 +39,7 @@ class G003M012SaleItemForm
                 TextInput::make('qty')
                     ->label('Jumlah Pembelian')
                     ->numeric()
+                    ->minValue(1)
                     ->afterStateUpdated(function (Get $get, Set $set, $state) {
                         /* $unit_price = $get('unit_price') ?? 0;
                         $set('subtotal', $state * $unit_price); */
