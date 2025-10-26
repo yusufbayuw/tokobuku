@@ -30,14 +30,16 @@ class G003M011SaleResource extends Resource
     protected static ?string $modelLabel = 'Penjualan';
     protected static ?string $navigationLabel = 'Penjualan';
 
-    /* public static function getEloquentQuery(): Builder
+    public static function getEloquentQuery(): Builder
     {
-        if (auth()->user()->hasRole(['admin', 'super_admin']) {
+        if (auth()->user()->hasRole(['admin', 'super_admin'])) {
             return parent::getEloquentQuery();
-        } elseif (auth()->user()->hasRole('agen') {
+        } elseif (auth()->user()->hasRole('agen')) {
+            return parent::getEloquentQuery()->where('user_id', auth()->user()->id);
+        } else {
             return parent::getEloquentQuery()->where('user_id', auth()->user()->id);
         }
-    } */
+    }
 
     public static function form(Schema $schema): Schema
     {

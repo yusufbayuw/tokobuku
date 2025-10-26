@@ -68,7 +68,7 @@ class User extends Authenticatable implements FilamentUser
      */
     public function sales(): HasMany
     {
-        return $this->hasMany(G003M011Sale::class, 'sold_by');
+        return $this->hasMany(G003M011Sale::class, 'user_id');
     }
 
     /**

@@ -26,7 +26,7 @@ class G003M012SaleItemForm
                     ->relationship('book', 'title')
                     ->afterStateUpdated(function (Get $get, Set $set, $state) {
                         // Assuming Book model has a 'price' attribute
-                        $book = \App\Models\G001M004Book::find($state);
+                        /* $book = \App\Models\G001M004Book::find($state);
                     
                         if ($book) {
                             $book_price = auth()->user()->hasRole('agen') ? $book->agent_price : $book->retail_price;
@@ -34,14 +34,14 @@ class G003M012SaleItemForm
                             if ($get('qty')) {
                                 $set('subtotal', $get('qty') * $book_price);
                             }
-                        }
+                        } */
                     }),
                 TextInput::make('qty')
                     ->label('Jumlah Pembelian')
                     ->numeric()
                     ->afterStateUpdated(function (Get $get, Set $set, $state) {
-                        $unit_price = $get('unit_price') ?? 0;
-                        $set('subtotal', $state * $unit_price);
+                        /* $unit_price = $get('unit_price') ?? 0;
+                        $set('subtotal', $state * $unit_price); */
                     })
                     ->reactive(),
                 TextEntry::make('unit_price')
