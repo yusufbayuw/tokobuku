@@ -12,12 +12,8 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        if ($user->hasRole('agen')) {
-            G002M007Location::firstOrCreate(['user_id' => $user->id], [
-                'name' => 'Agen ' . $user->name,
-                'type' => 'agen',
-            ]);
-        }
+        // Role assignment happens after user creation in Filament
+        // Location will be created in the updated() event
     }
 
     /**
@@ -25,17 +21,15 @@ class UserObserver
      */
     public function updated(User $user): void
     {
-        // Check if roles were changed
-        if ($user->wasChanged('roles') || $user->wasChanged('name')) {
-            if ($user->hasRole('agen')) {
-                G002M007Location::updateOrCreate(
-                    ['user_id' => $user->id],
-                    [
-                        'name' => 'Agen ' . $user->name,
-                        'type' => 'agen',
-                    ]
-                );
-            }
+        // Handle location creation/update when user becomes an agent or name changes
+        if ($user->hasRole('agen')) {
+            G002M007Location::updateOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'name' => 'Agen ' . $user->name,
+                    'type' => 'agen',
+                ]
+            );
         }
     }
 
@@ -44,7 +38,8 @@ class UserObserver
      */
     public function deleted(User $user): void
     {
-        // 
+        // Remove all locations associated with the user when deleted
+        G002M007Location::where('user_id', $user->id)->delete();
     }
 
     /**
@@ -52,7 +47,16 @@ class UserObserver
      */
     public function restored(User $user): void
     {
-        //
+        // If user is restored and has agent role, recreate their location
+        if ($user->hasRole('agen')) {
+            G002M007Location::updateOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'name' => 'Agen ' . $user->name,
+                    'type' => 'agen',
+                ]
+            );
+        }
     }
 
     /**
@@ -60,6 +64,7 @@ class UserObserver
      */
     public function forceDeleted(User $user): void
     {
-        //
+        // Ensure all locations are removed when user is force deleted
+        G002M007Location::where('user_id', $user->id)->delete();
     }
 }
