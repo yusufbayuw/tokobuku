@@ -4,8 +4,9 @@ namespace App\Observers;
 
 use App\Models\G002M007Location;
 use App\Models\User;
+use Illuminate\Contracts\Events\ShouldHandleEventsAfterCommit;
 
-class UserObserver
+class UserObserver implements ShouldHandleEventsAfterCommit
 {
     /**
      * Handle the User "created" event.
