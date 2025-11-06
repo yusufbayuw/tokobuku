@@ -29,12 +29,16 @@ class G003M011SaleForm
                     ->preload()
                     ->relationship('location', 'name')
                     ->label('Lokasi Penjualan')
-                    ->default(auth()->user()->location->id ?? 'Toko'),
+                    ->disabled(fn () => (auth()->user()->hasRole('agen')))
+                    ->dehydrated()
+                    ->default(auth()->user()->locations->first()?->id ?? 'Toko'),
                 Select::make('user_id')
                     ->searchable()
                     ->preload()
                     ->relationship('seller', 'name')
                     ->label('Dijual Oleh')
+                    ->disabled(fn () => (auth()->user()->hasRole('agen')))
+                    ->dehydrated()
                     ->default(auth()->id() ?? null),
                 TextInput::make('customer_name')
                     ->label('Nama Pelanggan')

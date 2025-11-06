@@ -9,7 +9,7 @@ use Filament\Schemas\Schema;
 use App\Models\G002M009Return;
 use Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
-use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\G002M009Returns\Pages\EditG002M009Return;
 use App\Filament\Resources\G002M009Returns\Pages\ViewG002M009Return;
 use App\Filament\Resources\G002M009Returns\Pages\ListG002M009Returns;
@@ -30,14 +30,16 @@ class G002M009ReturnResource extends Resource
     protected static ?string $modelLabel = 'Distribusi Buku';
     protected static ?string $navigationLabel = 'Distribusi Buku';
 
-    /* public static function getEloquentQuery(): Builder
+    public static function getEloquentQuery(): Builder
     {
         if (auth()->user()->hasRole(['admin', 'super_admin'])) {
             return parent::getEloquentQuery();
-        } elseif (auth()->user()->hasRole('agen') {
+        } elseif (auth()->user()->hasRole('agen')) {
+            return parent::getEloquentQuery()->where('handled_by', auth()->user()->id);
+        } else {
             return parent::getEloquentQuery()->where('handled_by', auth()->user()->id);
         }
-    } */
+    }
 
     public static function form(Schema $schema): Schema
     {

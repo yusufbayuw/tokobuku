@@ -51,10 +51,17 @@ class ItemsRelationManager extends RelationManager
                     ->searchable()
                     ->reactive()
                     ->preload()
-                    ->relationship('book', 'title'),
+                    ->relationship('book', 'title', fn ($query) => 
+                        $query->whereHas('stocks', function($query) {
+                            $query->where('g002_m007_location_id', $this->getOwnerRecord()->g002_m007_location_id)
+                                 ->where('qty', '>', 0);
+                        })
+                    )
+                    ->helperText('Hanya menampilkan buku yang tersedia di stok lokasi ini'),
                 TextInput::make('qty')
                     ->label('Jumlah')
                     ->reactive()
+                    ->minValue(1)
                     ->disabled(fn (Get $get) => ! $get('g001_m004_book_id'))
                     ->maxValue(function (Get $get) use ($getStockQty) {
                         $qty = $getStockQty($get('g001_m004_book_id'));
