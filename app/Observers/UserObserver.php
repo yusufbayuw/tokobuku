@@ -4,9 +4,8 @@ namespace App\Observers;
 
 use App\Models\G002M007Location;
 use App\Models\User;
-use Illuminate\Contracts\Events\ShouldHandleEventsAfterCommit;
 
-class UserObserver implements ShouldHandleEventsAfterCommit
+class UserObserver
 {
     /**
      * Handle the User "created" event.
@@ -26,11 +25,17 @@ class UserObserver implements ShouldHandleEventsAfterCommit
      */
     public function updated(User $user): void
     {
-        if ($user->hasRole('agen')) {
-            G002M007Location::firstOrCreate(['user_id' => $user->id], [
-                'name' => 'Agen ' . $user->name,
-                'type' => 'agen',
-            ]);
+        // Check if roles were changed
+        if ($user->wasChanged('roles') || $user->wasChanged('name')) {
+            if ($user->hasRole('agen')) {
+                G002M007Location::updateOrCreate(
+                    ['user_id' => $user->id],
+                    [
+                        'name' => 'Agen ' . $user->name,
+                        'type' => 'agen',
+                    ]
+                );
+            }
         }
     }
 
@@ -39,7 +44,7 @@ class UserObserver implements ShouldHandleEventsAfterCommit
      */
     public function deleted(User $user): void
     {
-        //
+        // 
     }
 
     /**
