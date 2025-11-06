@@ -12,17 +12,11 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        // Role assignment happens after user creation in Filament
-        // Location will be created in the updated() event
-    }
-
-    /**
-     * Handle the User "updated" event.
-     */
-    public function updated(User $user): void
-    {
         // Handle location creation/update when user becomes an agent or name changes
-        if ($user->hasRole('agen')) {
+        if ($user->role_helper == 'agen') {
+            $user->syncRoles([]);
+            $user->assignRole('agen');
+            $user->saveQuietly();
             G002M007Location::updateOrCreate(
                 ['user_id' => $user->id],
                 [
@@ -31,6 +25,50 @@ class UserObserver
                 ]
             );
         }
+
+        if ($user->role_helper == 'admin') {
+            $user->syncRoles([]);
+            $user->assignRole('admin');
+            $user->saveQuietly();
+        }
+
+        if ($user->role_helper == 'super_admin') {
+            $user->syncRoles([]);
+            $user->assignRole('super_admin');
+            $user->saveQuietly();
+        }
+    }
+
+    /**
+     * Handle the User "updated" event.
+     */
+    public function updated(User $user): void
+    {
+        // Handle location creation/update when user becomes an agent or name changes
+        if ($user->role_helper == 'agen') {
+            $user->syncRoles([]);
+            $user->assignRole('agen');
+            $user->saveQuietly();
+            G002M007Location::updateOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'name' => 'Agen ' . $user->name,
+                    'type' => 'agen',
+                ]
+            );
+        }
+
+        if ($user->role_helper == 'admin') {
+            $user->syncRoles([]);
+            $user->assignRole('admin');
+            $user->saveQuietly();
+        }
+
+        if ($user->role_helper == 'super_admin') {
+            $user->syncRoles([]);
+            $user->assignRole('super_admin');
+            $user->saveQuietly();
+        }
     }
 
     /**
@@ -38,8 +76,7 @@ class UserObserver
      */
     public function deleted(User $user): void
     {
-        // Remove all locations associated with the user when deleted
-        G002M007Location::where('user_id', $user->id)->delete();
+        //
     }
 
     /**

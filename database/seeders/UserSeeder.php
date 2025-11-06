@@ -21,26 +21,23 @@ class UserSeeder extends Seeder
             'email' => 'super@admin.com',
             'password' => bcrypt('12345678'),
             'username' => 'superadmin',
+            'role_helper' => 'super_admin'
         ]);
-        $superadmin->assignRole('super_admin');
-        $superadmin->save();
         
         $admin = User::create([
             'name' => 'Lorem Ipsum',
             'email' => 'admin@admin.com',
             'password' => bcrypt('12345678'),
             'username' => 'admin',
+            'role_helper' => 'admin'
         ]);
-        $admin->assignRole('admin');
-        $admin->save();
 
         $agen1 = User::create([
             'name' => 'Dolor Amet',
             'email' => 'agen@agen.com',
             'password' => bcrypt('12345678'),
+             'username' => 'agen',
+            'role_helper' => 'agen'
         ]);
-        $agen1->assignRole('agen');
-        $agen1->username = 'agen';
-        $agen1->save();
     }
 }
