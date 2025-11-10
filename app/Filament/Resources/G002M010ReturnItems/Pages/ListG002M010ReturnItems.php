@@ -13,7 +13,7 @@ class ListG002M010ReturnItems extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            //CreateAction::make(),
         ];
     }
 }

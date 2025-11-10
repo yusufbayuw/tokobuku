@@ -23,7 +23,7 @@ class G002M010ReturnItemsTable
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('retur.return_date')
-                    ->label('Tanggal Retur')
+                    ->label('Tanggal')
                     ->dateTime('d M Y')
                     ->sortable(),
                 TextColumn::make('retur.fromLocation.name')
