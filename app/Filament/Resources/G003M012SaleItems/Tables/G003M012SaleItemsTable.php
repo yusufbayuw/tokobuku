@@ -15,6 +15,10 @@ class G003M012SaleItemsTable
     {
         return $table
             ->columns([
+                TextColumn::make('sale.sale_date')
+                    ->label('Tanggal')
+                    ->dateTime()
+                    ->searchable(),
                 TextColumn::make('sale.location.name')
                     ->label('Lokasi')
                     ->searchable(),
