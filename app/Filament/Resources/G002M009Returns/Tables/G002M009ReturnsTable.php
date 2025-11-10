@@ -21,7 +21,7 @@ class G002M009ReturnsTable
                 TextColumn::make('toLocation.name')
                     ->label('Lokasi Penerima')
                     ->searchable(),
-                TextColumn::make('returhandler.name')
+                TextColumn::make('handler.name')
                     ->label('Ditangani Oleh')
                     ->sortable()
                     ->searchable(),
