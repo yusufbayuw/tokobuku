@@ -10,6 +10,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use App\Filament\Resources\G002M008StockBalances\G002M008StockBalanceResource;
 use Filament\Forms\Components\Hidden;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Builder;
 
 class StockBalancesRelationManager extends RelationManager
 {
@@ -45,7 +46,15 @@ class StockBalancesRelationManager extends RelationManager
                             ->label('Lokasi Buku')
                             ->searchable()
                             ->preload()
-                            ->relationship('location', 'name')
+                            ->relationship(
+                                name: 'location',
+                                titleAttribute: 'name',
+                                modifyQueryUsing: fn (Builder $query) => $query->whereNotIn('id', function ($query) {
+                                    $query->select('g002_m007_location_id')
+                                        ->from('g002_m008_stock_balances')
+                                        ->where('g001_m004_book_id', $this->getOwnerRecord()->id);
+                                }),
+                            )
                             ->required(),
                         TextInput::make('qty')
                             ->label('Kuantitas')

@@ -46,7 +46,7 @@ class G001M004BooksTable
                     ->sum('stocks', 'qty')
                     ->label('Stok')
                     ->placeholder('-')
-                    ->suffix(fn ($state, $record) => $state < $record->min_stock ? ' ⚠️' : null)
+                    ->suffix(fn($state, $record) => $state < $record->min_stock ? ' ⚠️' : null)
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
@@ -64,6 +64,7 @@ class G001M004BooksTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                //DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

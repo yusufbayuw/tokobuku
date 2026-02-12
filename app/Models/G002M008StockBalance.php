@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class G002M008StockBalance extends Model
 {
@@ -21,5 +22,10 @@ class G002M008StockBalance extends Model
     public function location(): BelongsTo
     {
         return $this->belongsTo(G002M007Location::class, 'g002_m007_location_id');
+    }
+
+    public function corrections(): HasMany
+    {
+        return $this->hasMany(G002M013StockCorrection::class, 'g002_m008_stock_balance_id');
     }
 }
