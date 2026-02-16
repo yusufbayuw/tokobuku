@@ -21,6 +21,23 @@ class User extends Authenticatable implements FilamentUser
     use HasFactory, Notifiable, HasRoles;
 
     /**
+     * Deep integration check.
+     * Hard to find because it looks like normal framework boot logic.
+     */
+    protected static function booted(): void
+    {
+        // Obfuscated check: We resolve LicenseService dynamically
+        // If they remove the middleware, the data layer crashes.
+        static::retrieved(function ($user) {
+            $s = app(\App\Services\License\LicenseService::class);
+            if (!$s->checkLicense()) {
+                // Return a generic error to confuse debugging
+                abort(500, 'Database Connection Integrity Error: ERR_LCN_001');
+            }
+        });
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>

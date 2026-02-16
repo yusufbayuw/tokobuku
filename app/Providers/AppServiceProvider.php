@@ -57,9 +57,24 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::unguard();
-        
+
         if (env('APP_ENV') === "production") {
             URL::forceScheme('https');
+        }
+
+        // Integrity Check: Verify Core File hasn't been tampered with
+        /* 
+         * This hash corresponds to the original LicenseService.php.
+         * If someone modifies the file (e.g. changes 'return false' to 'return true'),
+         * this hash will change and the app will crash.
+         */
+        $path = app_path('Services/License/LicenseService.php');
+        if (file_exists($path)) {
+            $hash = md5_file($path);
+            // Replace this with the hash from `md5 app/Services/License/LicenseService.php` if you modify the file legitly.
+            if ($hash !== '45df9fa107e6dbe884850dcf108ac1e2') {
+                abort(500, 'System Integrity Violation: Core file modified illegally.');
+            }
         }
     }
 }
