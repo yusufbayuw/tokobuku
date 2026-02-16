@@ -9,6 +9,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Grouping\Group;
 
 class G002M008StockBalancesTable
 {
@@ -44,13 +45,19 @@ class G002M008StockBalancesTable
                     ->label('Lokasi Buku')
                     ->relationship('location', 'name'),
             ])
+            ->groups([
+                Group::make('book.title')
+                    ->label('Buku'),
+                Group::make('location.name')
+                    ->label('Lokasi'),
+            ])
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    //DeleteBulkAction::make(),
                 ]),
             ]);
     }

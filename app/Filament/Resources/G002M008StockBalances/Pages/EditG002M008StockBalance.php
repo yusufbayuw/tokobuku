@@ -18,4 +18,11 @@ class EditG002M008StockBalance extends EditRecord
             DeleteAction::make(),
         ];
     }
+
+    protected $listeners = ['refresh' => 'refresh'];
+
+    public function refresh(): void
+    {
+        $this->fillForm();
+    }
 }

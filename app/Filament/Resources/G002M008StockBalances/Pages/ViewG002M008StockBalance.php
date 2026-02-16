@@ -16,4 +16,11 @@ class ViewG002M008StockBalance extends ViewRecord
             EditAction::make(),
         ];
     }
+
+    protected $listeners = ['refresh' => 'refresh'];
+
+    public function refresh(): void
+    {
+        $this->fillForm();
+    }
 }

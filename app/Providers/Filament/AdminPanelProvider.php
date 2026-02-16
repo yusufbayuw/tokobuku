@@ -63,6 +63,10 @@ class AdminPanelProvider extends PanelProvider
                 FilamentShieldPlugin::make(),
                 FilamentBackgroundsPlugin::make(),
                 SimpleLightBoxPlugin::make(),
-            ]);
+            ])
+            ->renderHook(
+                \Filament\View\PanelsRenderHook::HEAD_END,
+                fn(): string => \Illuminate\Support\Facades\Blade::render("@vite('resources/css/app.css')")
+            );
     }
 }

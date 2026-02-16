@@ -15,7 +15,8 @@ class G003M012SaleItem extends Model
 
     protected $keyType = 'string';
     public $incrementing = false;
-    
+    protected $guarded = [];
+
     public function sale(): BelongsTo
     {
         return $this->belongsTo(G003M011Sale::class, 'g003_m011_sale_id');

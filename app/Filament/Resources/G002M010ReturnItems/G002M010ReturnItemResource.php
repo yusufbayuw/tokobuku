@@ -18,8 +18,12 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
+use App\Filament\Resources\G002M009Returns\G002M009ReturnResource;
+
 class G002M010ReturnItemResource extends Resource
 {
+    //protected static ?string $parentResource = G002M009ReturnResource::class;
+
     protected static ?string $model = G002M010ReturnItem::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookmark;

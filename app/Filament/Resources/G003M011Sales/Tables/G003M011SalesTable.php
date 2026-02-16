@@ -28,8 +28,13 @@ class G003M011SalesTable
                 TextColumn::make('items_sum_subtotal')
                     ->sum('items', 'subtotal')
                     ->label('Total')
-                    ->numeric()
+                    ->numeric(decimalPlaces: 0, thousandsSeparator: '.')
                     ->sortable(),
+                TextColumn::make('total_margin')
+                    ->label('Total Margin')
+                    ->numeric(decimalPlaces: 0, thousandsSeparator: '.')
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('created_at')
                     ->label('Tanggal Dibuat')
                     ->dateTime()
@@ -47,6 +52,21 @@ class G003M011SalesTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                \Filament\Actions\Action::make('download_invoice')
+                    ->label('Faktur')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->color('success')
+                    ->action(function ($record) {
+                        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.sale_invoice', ['record' => $record]);
+                        $pdf->setPaper('a4', 'portrait');
+
+                        $filename = 'Faktur-' . ($record->customer_name ?? 'Guest') . '-' . $record->created_at->format('Ymd') . '.pdf';
+
+                        return response()->streamDownload(
+                            fn() => print ($pdf->output()),
+                            $filename
+                        );
+                    }),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

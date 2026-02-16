@@ -14,7 +14,7 @@ class G002M009Return extends Model
 
     protected $keyType = 'string';
     public $incrementing = false;
-    
+
     public function fromLocation(): BelongsTo
     {
         return $this->belongsTo(G002M007Location::class, 'from_location_id');
@@ -35,29 +35,12 @@ class G002M009Return extends Model
         return $this->hasMany(G002M010ReturnItem::class, 'g002_m009_return_id');
     }
 
-    /** Konfirmasi retur → update stok agen (kurang) & toko (tambah) */
     public function confirm(): void
     {
-        if ($this->status === 'confirmed') return;
+        if ($this->status === 'confirmed') {
+            return;
+        }
 
-        DB::transaction(function () {
-            foreach ($this->items as $item) {
-                // Kurangi stok di lokasi asal (agen)
-                $from = G002M008StockBalance::firstOrCreate([
-                    'book_id' => $item->book_id,
-                    'location_id' => $this->from_location_id,
-                ]);
-                $from->decrement('qty', (int) $item->qty);
-
-                // Tambah stok di lokasi tujuan (toko)
-                $to = G002M008StockBalance::firstOrCreate([
-                    'book_id' => $item->book_id,
-                    'location_id' => $this->to_location_id,
-                ]);
-                $to->increment('qty', (int) $item->qty);
-            }
-
-            $this->update(['status' => 'confirmed']);
-        });
+        $this->update(['status' => 'confirmed']);
     }
 }

@@ -32,13 +32,18 @@ class G002M009ReturnResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        if (auth()->user()->hasRole(['admin', 'super_admin'])) {
+        $user = auth()->user();
+        if ($user->hasRole(['admin', 'super_admin'])) {
             return parent::getEloquentQuery();
-        } elseif (auth()->user()->hasRole('agen')) {
-            return parent::getEloquentQuery()->where('handled_by', auth()->user()->id);
-        } else {
-            return parent::getEloquentQuery()->where('handled_by', auth()->user()->id);
         }
+
+        $locationIds = $user->locations->pluck('id')->all();
+
+        return parent::getEloquentQuery()->where(function (Builder $query) use ($user, $locationIds) {
+            $query->where('handled_by', $user->id)
+                ->orWhereIn('from_location_id', $locationIds)
+                ->orWhereIn('to_location_id', $locationIds);
+        });
     }
 
     public static function form(Schema $schema): Schema

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\G002M008StockBalances;
 
+use App\Filament\Resources\G002M008StockBalances\RelationManagers\CorrectionsRelationManager;
 use UnitEnum;
 use BackedEnum;
 use Filament\Tables\Table;
@@ -70,7 +71,7 @@ class G002M008StockBalanceResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CorrectionsRelationManager::class,
         ];
     }
 

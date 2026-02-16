@@ -7,13 +7,18 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+use App\Observers\G003M011SaleObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+
+#[ObservedBy(G003M011SaleObserver::class)]
 class G003M011Sale extends Model
 {
     use HasUuids;
 
     protected $keyType = 'string';
     public $incrementing = false;
-    
+    protected $guarded = [];
+
     public function location(): BelongsTo
     {
         return $this->belongsTo(G002M007Location::class, 'g002_m007_location_id');
