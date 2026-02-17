@@ -12,9 +12,16 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\SkipsOnFailure;
+use Maatwebsite\Excel\Validators\Failure;
+use Maatwebsite\Excel\Concerns\SkipsFailures;
+use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
 
-class G001M004BookImport implements OnEachRow, WithHeadingRow, WithValidation, WithChunkReading, ShouldQueue
+class G001M004BookImport implements OnEachRow, WithHeadingRow, WithValidation, WithChunkReading, ShouldQueue, SkipsOnFailure, SkipsOnError
 {
+    use SkipsFailures, SkipsErrors;
+
     /**
      * @param Row $row
      */
@@ -29,12 +36,23 @@ class G001M004BookImport implements OnEachRow, WithHeadingRow, WithValidation, W
             $publisherId = $publisher->id;
         }
 
-        // 2. Create Book
+        // Logic check uniqueness explicitly to append suffix
+        $sku = $rowData['sku'] ?? null;
+        if ($sku && G001M004Book::where('sku', $sku)->exists()) {
+            $sku = $sku . '-' . \Illuminate\Support\Str::random(4);
+        }
+
+        $isbn = $rowData['isbn'] ?? null;
+        if ($isbn && G001M004Book::where('isbn', $isbn)->exists()) {
+            $isbn = $isbn . '-' . \Illuminate\Support\Str::random(4);
+        }
+
+        // 2. Create Book (Always create new, allowing duplicates with modified SKU/ISBN)
         $book = G001M004Book::create([
             'title' => $rowData['title'],
             'subtitle' => $rowData['subtitle'] ?? null,
-            'sku' => $rowData['sku'] ?? null,
-            'isbn' => $rowData['isbn'] ?? null,
+            'sku' => $sku,
+            'isbn' => $isbn,
             'edition' => $rowData['edition'] ?? null,
             'language' => $rowData['language'] ?? null,
             'pages' => $rowData['pages'] ?? null,
@@ -82,8 +100,8 @@ class G001M004BookImport implements OnEachRow, WithHeadingRow, WithValidation, W
     {
         return [
             'title' => 'required|string|max:255',
-            'sku' => 'nullable|unique:g001_m004_books,sku',
-            'isbn' => 'nullable|unique:g001_m004_books,isbn',
+            'sku' => 'nullable', // Removed unique validation to handle manually
+            'isbn' => 'nullable', // Removed unique validation to handle manually
             'publisher' => 'nullable|string',
             'cover_photo' => 'nullable|string',
             'active' => 'nullable|boolean',
