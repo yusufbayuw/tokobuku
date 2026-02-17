@@ -13,6 +13,10 @@ class ListG001M003Publishers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            \Filament\Actions\Action::make('downloadTemplate')
+                ->label('Download Template')
+                ->icon('heroicon-o-arrow-down-tray')
+                ->action(fn() => \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\TemplatePublisherExport, 'template_publishers.xlsx')),
             CreateAction::make(),
         ];
     }

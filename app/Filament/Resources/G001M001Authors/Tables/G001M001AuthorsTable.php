@@ -5,9 +5,13 @@ namespace App\Filament\Resources\G001M001Authors\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ExportAction;
+use Filament\Actions\ExportBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use App\Filament\Exports\G001M001AuthorExporter;
+
 
 class G001M001AuthorsTable
 {
@@ -41,9 +45,21 @@ class G001M001AuthorsTable
                 ViewAction::make(),
                 EditAction::make(),
             ])
-            ->toolbarActions([
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(G001M001AuthorExporter::class)
+                    ->visible(fn() => auth()->user()->hasRole(['super_admin', 'admin'])),
+                \EightyNine\ExcelImport\ExcelImportAction::make()
+                    ->color("primary")
+                    ->use(\App\Imports\G001M001AuthorImport::class)
+                    ->visible(fn() => auth()->user()->hasRole(['super_admin', 'admin'])),
+            ])
+            ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->exporter(G001M001AuthorExporter::class)
+                        ->visible(fn() => auth()->user()->hasRole(['super_admin', 'admin'])),
                 ]),
             ]);
     }

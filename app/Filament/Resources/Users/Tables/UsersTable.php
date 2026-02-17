@@ -8,6 +8,9 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use App\Filament\Exports\UserExporter;
+use Filament\Actions\ExportAction;
+use Filament\Actions\ExportBulkAction;
 
 class UsersTable
 {
@@ -41,9 +44,17 @@ class UsersTable
                 ViewAction::make(),
                 EditAction::make(),
             ])
-            ->toolbarActions([
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(UserExporter::class)
+                    ->visible(fn() => auth()->user()->hasRole(['super_admin', 'admin'])),
+            ])
+            ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->exporter(UserExporter::class)
+                        ->visible(fn() => auth()->user()->hasRole(['super_admin', 'admin'])),
                 ]),
             ]);
     }
