@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Auth\CustomLogin;
+use Filament\Enums\ThemeMode;
 use Filament\Panel;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\PanelProvider;
@@ -64,6 +65,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(asset('images/logo.png'))
             ->brandLogoHeight('3rem')
             ->favicon(asset('images/fav.png'))
+            ->defaultThemeMode(ThemeMode::Light)
             ->plugins([
                 FilamentShieldPlugin::make(),
                 FilamentBackgroundsPlugin::make(),
