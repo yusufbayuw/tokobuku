@@ -23,6 +23,7 @@ class G001M004BooksTable
                     ->label('Judul Buku')
                     ->searchable()
                     ->sortable()
+                    ->wrap()
                     ->toggleable(),
                 TextColumn::make('subtitle')
                     ->label('Sub Judul')
@@ -33,12 +34,12 @@ class G001M004BooksTable
                     ->placeholder('-')
                     ->sortable()
                     ->searchable()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('isbn')
                     ->label('ISBN')
                     ->placeholder('-')
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 TextColumn::make('edition')
                     ->label('Edisi')
                     ->placeholder('-')
@@ -56,9 +57,8 @@ class G001M004BooksTable
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('year')
                     ->label('Tahun Terbit')
-                    ->numeric()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 TextColumn::make('publisher.name')
                     ->label('Penerbit')
                     ->placeholder('-')
