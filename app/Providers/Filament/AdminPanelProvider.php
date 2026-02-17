@@ -60,6 +60,10 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->brandName('Toko Buku BI-Obses')
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('3rem')
+            ->favicon(asset('images/fav.png'))
             ->plugins([
                 FilamentShieldPlugin::make(),
                 FilamentBackgroundsPlugin::make(),

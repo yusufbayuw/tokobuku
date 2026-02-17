@@ -62,6 +62,17 @@ class G002M008StockBalancesTable
                 ExportAction::make()
                     ->exporter(G002M008StockBalanceExporter::class)
                     ->visible(fn() => auth()->user()->hasRole(['super_admin', 'admin'])),
+
+                \Filament\Actions\Action::make('downloadTemplate')
+                    ->label('Download Template')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->action(fn() => \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\TemplateStockBalanceExport, 'template_stock_balances.xlsx'))
+                    ->visible(fn() => auth()->user()->hasRole(['super_admin', 'admin'])),
+
+                \EightyNine\ExcelImport\ExcelImportAction::make()
+                    ->color("primary")
+                    ->use(\App\Imports\G002M008StockBalanceImport::class)
+                    ->visible(fn() => auth()->user()->hasRole(['super_admin', 'admin'])),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
