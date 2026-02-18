@@ -43,6 +43,7 @@ class G001M002CategoryResource extends Resource
         return G001M002CategoriesTable::configure($table);
     }
 
+    
     public static function getRelations(): array
     {
         return [
