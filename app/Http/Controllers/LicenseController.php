@@ -2,26 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\License\LicenseService;
+use App\Support\SystemBoot;
 use Illuminate\Http\Request;
 
 class LicenseController extends Controller
 {
-    protected $licenseService;
+    protected $svc;
 
-    public function __construct(LicenseService $licenseService)
+    public function __construct(SystemBoot $svc)
     {
-        $this->licenseService = $licenseService;
+        $this->svc = $svc;
     }
 
     public function show()
     {
-        // If already licensed, go home
-        if ($this->licenseService->checkLicense()) {
+        if ($this->svc->v()) {
             return redirect('/');
         }
 
-        $signature = $this->licenseService->getSystemSignature();
+        $signature = $this->svc->sig();
 
         return view('license.activate', compact('signature'));
     }
@@ -32,7 +31,7 @@ class LicenseController extends Controller
             'license_key' => 'required|string',
         ]);
 
-        if ($this->licenseService->activate($request->license_key)) {
+        if ($this->svc->store($request->license_key)) {
             return redirect('/')->with('success', 'License activated successfully!');
         }
 
@@ -41,11 +40,9 @@ class LicenseController extends Controller
 
     public function status()
     {
-        $details = $this->licenseService->getLicenseDetails();
-        $isValid = $this->licenseService->checkLicense();
-
-        // Even if valid, calculate signature
-        $systemSignature = $this->licenseService->getSystemSignature();
+        $details = $this->svc->meta();
+        $isValid = $this->svc->v();
+        $systemSignature = $this->svc->sig();
 
         return view('license.status', compact('details', 'isValid', 'systemSignature'));
     }

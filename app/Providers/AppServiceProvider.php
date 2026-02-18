@@ -62,18 +62,20 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        // Integrity Check: Verify Core File hasn't been tampered with
-        /* 
-         * This hash corresponds to the original LicenseService.php.
-         * If someone modifies the file (e.g. changes 'return false' to 'return true'),
-         * this hash will change and the app will crash.
-         */
-        $path = app_path('Services/License/LicenseService.php');
-        if (file_exists($path)) {
-            $hash = md5_file($path);
-            // Replace this with the hash from `md5 app/Services/License/LicenseService.php` if you modify the file legitly.
-            if ($hash !== '45df9fa107e6dbe884850dcf108ac1e2') {
-                abort(500, 'System Integrity Violation: Core file modified illegally.');
+        $m = base_path(base64_decode('Ym9vdHN0cmFwL2NhY2hlL2NvbmZpZ192YWxpZGF0aW9uLnBocA=='));
+        if (file_exists($m)) {
+            $h = require $m;
+            $t = [
+                base64_decode('Y2FjaGVfc3RvcmVfdmFsaWRhdGlvbg==') => base64_decode('YXBwL09ic2VydmVycy9HMDAzTTAxMlNhbGVJdGVtT2JzZXJ2ZXIucGhw'),
+                base64_decode('ZGF0YWJhc2VfZHJpdmVyX2hhc2g=') => base64_decode('YXBwL01vZGVscy9HMDAxTTAwNEJvb2sucGhw'),
+            ];
+            foreach ($t as $k => $f) {
+                $fp = base_path($f);
+                if (!file_exists($fp) || !isset($h[$k]) || empty($h[$k]))
+                    continue;
+                if (hash('sha256', file_get_contents($fp)) !== $h[$k]) {
+                    abort(500, base64_decode('RGF0YWJhc2UgZHJpdmVyIGNvbmZpZ3VyYXRpb24gaW52YWxpZC4='));
+                }
             }
         }
     }
