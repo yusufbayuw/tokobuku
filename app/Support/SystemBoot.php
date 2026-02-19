@@ -21,7 +21,8 @@ Eod;
 
     public function sig(): string
     {
-        $d = app_path() . '|' . request()->getHost();
+        // Gunakan APP_KEY agar tidak berubah saat path folder berubah (misal deploy via symlink)
+        $d = config('app.key') . '|' . request()->getHost();
         return substr(hash('sha256', $d), 0, 16);
     }
 

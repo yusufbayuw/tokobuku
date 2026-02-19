@@ -4,7 +4,7 @@
 // Do not modify manually. Use: php artisan optimize
 
 return [
-    'session_driver_checksum' => '367f95d9fcad063923d8a7a7a3f1dd4baa067c6a6a243170b41751a312a523bf',
+    'session_driver_checksum' => '92c160c436920d7b6c59842b05aab4eec853806935aa76a88dc2cf8cd8b533c5',
     'encryption_service_hash' => 'eb9220391c65072641f3d28a878cae739e3634bd36e137811e1fbb07891eaf31',
     'queue_connection_verify' => '93e00e2909d25ca5dbc73963aea27e1dc4e3163fd5f1c909577ec0087f7cee51',
     'middleware_stack_digest' => 'c91f2b3994c695fc06a89b6f6ac4646f940b594ef97baf6b538687722b4277e9',
