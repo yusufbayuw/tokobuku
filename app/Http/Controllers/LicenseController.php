@@ -20,6 +20,11 @@ class LicenseController extends Controller
             return redirect('/');
         }
 
+        $configKey = config('app.license_key');
+        if (!empty($configKey) && $this->svc->store($configKey)) {
+            return redirect('/')->with('success', 'License activated successfully from config!');
+        }
+
         $signature = $this->svc->sig();
 
         return view('license.activate', compact('signature'));
