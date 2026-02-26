@@ -27,6 +27,18 @@ class G001M001AuthorsTable
                     ->label('Buku')
                     ->placeholder('-')
                     ->sortable(),
+                TextColumn::make('contact_person')
+                    ->label('Kontak Person')
+                    ->placeholder('-')
+                    ->copyable()
+                    ->sortable(),
+                TextColumn::make('address')
+                    ->label('Alamat')
+                    ->placeholder('-')
+                    ->copyable()
+                    ->wrap()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Dibuat Pada')
                     ->dateTime('d M Y H:i:s')

@@ -24,6 +24,13 @@ class G001M001AuthorForm
                     ->label('Foto')
                     ->hidden()
                     ->default(null),
+                TextInput::make('contact_person')
+                    ->label('Kontak Person')
+                    ->default(null),
+                Textarea::make('address')
+                    ->label('Alamat')
+                    ->default(null)
+                    ->columnSpanFull(),
             ]);
     }
 }

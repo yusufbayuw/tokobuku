@@ -29,6 +29,13 @@ class G001M001AuthorInfolist
                                     ->label('Foto')
                                     ->hidden()
                                     ->placeholder('-'),
+                                TextEntry::make('contact_person')
+                                    ->label('Kontak Person')
+                                    ->placeholder('-'),
+                                TextEntry::make('address')
+                                    ->label('Alamat')
+                                    ->placeholder('-')
+                                    ->columnSpanFull(),
                             ]),
                         Tabs\Tab::make('Riwayat')
                             ->icon('heroicon-o-clock')
