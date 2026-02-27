@@ -20,6 +20,9 @@ class G001M001AuthorForm
                     ->label('Deskripsi')
                     ->default(null)
                     ->columnSpanFull(),
+                TextInput::make('email')
+                    ->label('Email')
+                    ->default(null),
                 TextInput::make('photo')
                     ->label('Foto')
                     ->hidden()

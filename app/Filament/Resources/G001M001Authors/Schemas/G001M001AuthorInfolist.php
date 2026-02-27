@@ -25,6 +25,9 @@ class G001M001AuthorInfolist
                                     ->label('Deskripsi')
                                     ->placeholder('-')
                                     ->columnSpanFull(),
+                                TextEntry::make('email')
+                                    ->label('Email')
+                                    ->placeholder('-'),
                                 ImageEntry::make('photo')
                                     ->label('Foto')
                                     ->hidden()

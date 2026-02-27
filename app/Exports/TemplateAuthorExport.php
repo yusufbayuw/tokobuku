@@ -14,12 +14,16 @@ class TemplateAuthorExport implements FromArray, WithHeadings, ShouldAutoSize
             [
                 'name' => 'John Doe',
                 'bio' => 'A famous writer of mystery novels.',
-                'photo' => 'https://example.com/photos/johndoe.jpg',
+                'email' => 'email@example.com',
+                'contact_person' => '08123456789',
+                'address' => 'Jl. Contoh No. 123',
             ],
             [
                 'name' => 'Jane Smith, Ph.D.',
                 'bio' => 'Expert in science fiction.',
-                'photo' => '',
+                'email'=> 'email@example.com',
+                'contact_person' => '08123456789',
+                'address' => 'Jl. Contoh No. 123',
             ]
         ];
     }
@@ -29,7 +33,9 @@ class TemplateAuthorExport implements FromArray, WithHeadings, ShouldAutoSize
         return [
             'name',
             'bio',
-            'photo',
+            'email',
+            'contact_person',
+            'address',
         ];
     }
 }

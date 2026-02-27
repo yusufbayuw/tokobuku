@@ -27,6 +27,11 @@ class G001M001AuthorsTable
                     ->label('Buku')
                     ->placeholder('-')
                     ->sortable(),
+                TextColumn::make('email')
+                    ->label('Email')
+                    ->placeholder('-')
+                    ->copyable()
+                    ->sortable(),
                 TextColumn::make('contact_person')
                     ->label('Kontak Person')
                     ->placeholder('-')

@@ -19,7 +19,9 @@ class G001M001AuthorExporter extends Exporter
                 ->label('ID'),
             ExportColumn::make('name'),
             ExportColumn::make('bio'),
-            ExportColumn::make('photo'),
+            ExportColumn::make('email'),
+            ExportColumn::make('contact_person'),
+            ExportColumn::make('address'),
             ExportColumn::make('created_at'),
             ExportColumn::make('updated_at'),
         ];

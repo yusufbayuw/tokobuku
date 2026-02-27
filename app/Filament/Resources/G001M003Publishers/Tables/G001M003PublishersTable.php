@@ -31,6 +31,13 @@ class G001M003PublishersTable
                     ->copyable()
                     ->placeholder('-')
                     ->searchable(),
+                TextColumn::make('address')
+                    ->label('Alamat Penerbit')
+                    ->copyable()
+                    ->placeholder('-')
+                    ->wrap()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
