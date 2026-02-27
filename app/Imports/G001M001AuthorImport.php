@@ -28,7 +28,9 @@ class G001M001AuthorImport implements ToModel, WithHeadingRow, WithValidation, W
         return new G001M001Author([
             'name' => $row['name'],
             'bio' => $row['bio'] ?? null,
-            'photo' => $row['photo'] ?? null,
+            'email' => $row['email'] ?? null,
+            'contact_person' => $row['contact_person'] ?? null,
+            'address' => $row['address'] ?? null,
         ]);
     }
 
@@ -37,7 +39,9 @@ class G001M001AuthorImport implements ToModel, WithHeadingRow, WithValidation, W
         return [
             'name' => 'required|string|max:255',
             'bio' => 'nullable|string',
-            'photo' => 'nullable|string',
+            'email' => 'nullable|string',
+            'contact_person' => 'nullable|string',
+            'address' => 'nullable|string',
         ];
     }
 
