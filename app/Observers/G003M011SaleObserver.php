@@ -7,6 +7,17 @@ use App\Models\G002M008StockBalance;
 
 class G003M011SaleObserver
 {
+    public function creating(G003M011Sale $sale): void
+    {
+        $user = auth()->user();
+        if ($user && $user->hasRole('agen')) {
+            $allowedLocations = $user->locations->pluck('id')->all();
+            if (!in_array($sale->g002_m007_location_id, $allowedLocations)) {
+                abort(403, 'Anda tidak memiliki akses ke lokasi yang dipilih.');
+            }
+        }
+    }
+
     public function updated(G003M011Sale $sale): void
     {
         if ($sale->isDirty('status') && $sale->status === 'cancelled') {

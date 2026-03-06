@@ -67,13 +67,21 @@ class G003M011SaleForm
                             : $query
                     )
                     ->label('Lokasi Penjualan')
+                    ->reactive()
+                    ->afterStateUpdated(function ($state) {
+                        if ($state) {
+                            session(['last_location_id' => $state]);
+                        }
+                    })
                     ->disabled(fn($record) => 
                         (auth()->user()->hasRole('agen') && auth()->user()->locations->count() <= 1) || 
                         in_array($record?->status, ['final', 'cancelled']) || 
                         ($record && $record->items()->exists())
                     )
                     ->dehydrated()
-                    ->default(auth()->user()->locations->first()?->id ?? 'Toko'),
+                    ->default(auth()->user()->locations->count() === 1 
+                        ? auth()->user()->locations->first()?->id 
+                        : session('last_location_id') ?? auth()->user()->locations->first()?->id ?? 'Toko'),
                 Select::make('user_id')
                     ->searchable()
                     ->preload()
