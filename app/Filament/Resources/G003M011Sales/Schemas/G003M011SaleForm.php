@@ -59,9 +59,19 @@ class G003M011SaleForm
                 Select::make('g002_m007_location_id')
                     ->searchable()
                     ->preload()
-                    ->relationship('location', 'name')
+                    ->relationship(
+                        name: 'location', 
+                        titleAttribute: 'name',
+                        modifyQueryUsing: fn (\Illuminate\Database\Eloquent\Builder $query) => auth()->user()->hasRole('agen') 
+                            ? $query->whereIn('id', auth()->user()->locations->pluck('id')) 
+                            : $query
+                    )
                     ->label('Lokasi Penjualan')
-                    ->disabled(fn($record) => (auth()->user()->hasRole('agen')) || in_array($record?->status, ['final', 'cancelled']))
+                    ->disabled(fn($record) => 
+                        (auth()->user()->hasRole('agen') && auth()->user()->locations->count() <= 1) || 
+                        in_array($record?->status, ['final', 'cancelled']) || 
+                        ($record && $record->items()->exists())
+                    )
                     ->dehydrated()
                     ->default(auth()->user()->locations->first()?->id ?? 'Toko'),
                 Select::make('user_id')
@@ -69,7 +79,7 @@ class G003M011SaleForm
                     ->preload()
                     ->relationship('seller', 'name')
                     ->label('Dijual Oleh')
-                    ->disabled(fn($record) => (auth()->user()->hasRole('agen')) || in_array($record?->status, ['final', 'cancelled']))
+                    ->disabled(fn($record) => (auth()->user()->hasRole('agen') && auth()->user()->locations->count() <= 1) || in_array($record?->status, ['final', 'cancelled']))
                     ->dehydrated()
                     ->default(auth()->id() ?? null),
                 TextInput::make('customer_name')

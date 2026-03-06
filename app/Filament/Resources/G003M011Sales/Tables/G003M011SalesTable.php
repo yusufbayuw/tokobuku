@@ -50,7 +50,16 @@ class G003M011SalesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                \Filament\Tables\Filters\SelectFilter::make('g002_m007_location_id')
+                    ->label('Lokasi')
+                    ->options(function () {
+                        if (auth()->user()->hasRole(['admin', 'super_admin'])) {
+                            return \App\Models\G002M007Location::pluck('name', 'id');
+                        }
+                        return auth()->user()->locations->pluck('name', 'id');
+                    })
+                    ->searchable()
+                    ->preload(),
             ])
             ->recordActions([
                 ViewAction::make(),
