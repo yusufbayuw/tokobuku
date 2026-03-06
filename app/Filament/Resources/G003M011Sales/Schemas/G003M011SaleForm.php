@@ -53,6 +53,7 @@ class G003M011SaleForm
                         return $allOptions;
                     })
                     ->disabled(fn($record) => $record?->status === 'cancelled')
+                    ->live()
                     ->dehydrated()
                     ->required()
                     ->default('draft'),
@@ -114,6 +115,7 @@ class G003M011SaleForm
                     ->numeric()
                     ->hidden()
                     ->label('Total Penjualan')
+                    ->dehydrated(false)
                     ->default(null),
             ]);
     }

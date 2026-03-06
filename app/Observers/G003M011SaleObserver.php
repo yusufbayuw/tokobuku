@@ -18,6 +18,11 @@ class G003M011SaleObserver
         }
     }
 
+    public function saving(G003M011Sale $sale): void
+    {
+        file_put_contents(storage_path('logs/debug_sale.log'), "[" . date('Y-m-d H:i:s') . "] Saving sale. Original status: " . $sale->getOriginal('status') . ", New status: " . $sale->status . "\n", FILE_APPEND);
+    }
+
     public function updated(G003M011Sale $sale): void
     {
         if ($sale->isDirty('status') && $sale->status === 'cancelled') {
